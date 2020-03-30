@@ -17,34 +17,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.node = [[FNFlexNode alloc] initWithRenderMode:FNFlexFrameRenderModeDynamic];
-    self.node.width = 200;
-    self.node.backgroundColor = UIColor.blackColor;
-    self.node.height = 400;
-    [self.view addSubview:self.node.view];
-    self.node.isWrap = true;
-//    self.node.backgroundColor = UIColor.whiteColor;
+    self.node = [[FNFlexNode alloc] init];
+    self.node.width = 1000;
+    self.node.height = 1000;
+    self.node.wrap = true;
+    self.node.lineJustify = FNFlexLayoutJustifyTypeStretch;
+    self.node.align = FNFlexLayoutAlignTypeStretch;
     
-    for (int i = 0; i < 10; i++) {
-        UILabel* l = [[UILabel alloc] init];
-        FNFlexNode* node  =  [[FNFlexNode alloc] initWithView:l];
-        l.text = @"asdadad";
-        l.textColor = UIColor.redColor;
-        l.font = [UIFont systemFontOfSize:10 + i];
-        
-        [self.node addSubItem:node];
-        
+//    self.node.direction = FNFlexLayoutDirectionTypeCol;
+    for (int i = 0; i < 2; i ++) {
+        FNFlexNode * n = [[FNFlexNode alloc] init];
+        [self.node addSubNode:n];
+        n.width = 10;
+//        n.height = 10;
+        if(i == 0){
+            n.grow = 1;
+        }
+//        for (int j = 0; j < 2; j ++) {
+//            FNFlexNode * nn = [[FNFlexNode alloc] init];
+//            [n addSubNode:nn];
+//            nn.width = 10;
+//            nn.height = 10;
+//            if(i == 0){
+//                nn.grow = 1;
+//            }
+//        }
     }
-    [self.node layout];
-    
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (IBAction)change:(id)sender {
-    self.node.width = 320;
-    [UIView animateWithDuration:0.4 animations:^{
-        [self.node layout];
-    }];
+    [self.node layout];
+    NSLog(@"%@",self.node);
 }
 
 @end

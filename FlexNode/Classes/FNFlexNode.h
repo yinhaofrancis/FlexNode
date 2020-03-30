@@ -1,14 +1,14 @@
 //
-//  FNFlexBox.h
-//  HamUI_Example
+//  FNFlexLayouter.h
+//  FlexNode
 //
-//  Created by hao yin on 2020/3/25.
-//  Copyright © 2020 yinhaofrancis. All rights reserved.
+//  Created by hao yin on 2020/3/29.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
-@class FNFlexLine;
+
 typedef NS_ENUM(NSUInteger, FNFlexLayoutJustifyType) {
     FNFlexLayoutJustifyTypeFlexStart,
     FNFlexLayoutJustifyTypeFlexCenter,
@@ -35,100 +35,83 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
     FNFlexFrameRenderModeDynamic,
     FNFlexFrameRenderModeStatic,
 };
-
+@class FNFlexLine;
 
 @interface FNFlexNode : NSObject
-#pragma mark - layout
 
-@property(nonatomic,assign) CGRect frame;
-
-@property(nonatomic,assign) CGFloat width;
-
-@property(nonatomic,assign) CGFloat height;
-
+@property(nonatomic,readonly) CGRect frame;
 @property(nonatomic,assign) CGFloat x;
-
 @property(nonatomic,assign) CGFloat y;
-
-@property(nonatomic,assign) CGFloat grow;
-
-@property(nonatomic,assign) CGFloat shrink;
-
-@property(nonatomic,assign) FNFlexLayoutJustifyType justify;
-
-@property(nonatomic,assign) FNFlexLayoutAlignType align;
-
-@property(nonatomic,assign) FNFlexLayoutJustifyType linejustify;
-
+@property(nonatomic,assign) CGFloat width;
+@property(nonatomic,assign) CGFloat height;
+@property(nonatomic,readonly) NSArray<FNFlexNode *> *subNode;
+@property(nonatomic,readonly) NSArray<FNFlexLine *> *sublines;
+@property(nonatomic,readonly)  FNFlexNode *superNode;
 @property(nonatomic,assign) FNFlexLayoutDirectionType direction;
+@property(nonatomic,assign) FNFlexLayoutAlignType align;
+@property(nonatomic,assign) FNFlexLayoutJustifyType justify;
+@property(nonatomic,assign) FNFlexLayoutJustifyType lineJustify;
+@property(nonatomic,assign) BOOL wrap;
+@property (nonatomic,assign) CGFloat grow;
 
-@property(nonatomic,weak)  FNFlexNode * superItem;
+@property (nonatomic,assign) CGFloat shrink;
 
-@property(nonatomic,readonly) NSArray<FNFlexNode *> *subItems;
+- (void) setAxisLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction;
 
-@property(nonatomic,assign) CGFloat axisSize;
+- (void) setNormalLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction;
 
-@property(nonatomic,assign) CGFloat normalSize;
+- (void) setAxisSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction;
 
-@property(nonatomic,assign) CGFloat axisLocation;
+- (void) setNormalSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction;
 
-@property(nonatomic,assign) CGFloat normalLocation;
 
-@property(nonatomic,assign) BOOL isWrap;
+- (CGFloat) axisLocationWithDirection:(FNFlexLayoutDirectionType)direction;
 
-- (void)addSubItem:(FNFlexNode *)item;
+- (CGFloat) normalLocationWithDirection:(FNFlexLayoutDirectionType)direction;
 
-- (void)removeSubItemAt:(NSUInteger)index;
+- (CGFloat) axisSizeWithDirection:(FNFlexLayoutDirectionType)direction;
+
+- (CGFloat) normalSizeWithDirection:(FNFlexLayoutDirectionType)direction;
+
+- (void)addSubNode:(FNFlexNode *)node;
 
 - (void)layout;
 
-- (void)layoutLines:(NSArray<FNFlexLine *> *)lines;
+- (void)seperatedLine;
 
-- (FNFlexLine *)classifyStart:(NSInteger)start stopAt:(NSInteger *)end;
- 
-- (NSArray<FNFlexLine *> *)sepretedLines;
+- (void)fillSize;
 
-- (void)calcSelfFrameSize:(NSArray<FNFlexLine *> *)lines;
-
-#pragma mark - display
-@property(nonatomic,readonly) Class layerClass;
-
-@property(nonatomic,readonly) Class viewClass;
-
-@property(nonatomic,readonly,nullable) CALayer *layer;
-
-@property(nonatomic,readonly,nullable) UIView *view;
-
-- (void)drawLayer:(CGContextRef)ctx;
-
-@property(nonatomic,readonly) FNFlexFrameRenderMode renderMode;
-
-@property(nonatomic,strong) UIColor* backgroundColor;
-
-- (instancetype)initWithRenderMode:(FNFlexFrameRenderMode)mode;
-
-- (instancetype)initWithLayer:(CALayer *)layer;
-
-- (instancetype)initWithView:(UIView *)view;
+- (void)backup;
 
 @end
 
+@interface FNFlexLine : NSObject
 
-@interface FNFlexLine:NSObject
-    
-@property(nonatomic,assign) CGFloat axisSize;
+@property (nonatomic, assign) CGFloat axisLocation;
 
-@property(nonatomic,assign) CGFloat normalSize;
+@property (nonatomic, assign) CGFloat normalLocation;
 
-@property(nonatomic,assign) CGFloat axisLocation;
+@property (nonatomic, assign) CGFloat axisSize;
 
-@property(nonatomic,assign) CGFloat normalLocation;
+@property (nonatomic, assign) CGFloat normalSize;
 
-@property(nonatomic,copy) NSArray<FNFlexNode *> *subItems;
+@property (nonatomic, copy) NSArray<FNFlexNode *> *subNode;
 
-- (instancetype)initWithItems:(NSArray<FNFlexNode *> *)items normalSize:(CGFloat)normalSize axisSize:(CGFloat)axisSize;
-- (void)layout:(FNFlexNode *)container;
-    
+@property (nonatomic,weak) FNFlexNode* ownNode;
+
+@property (nonatomic, readonly) CGFloat space;
+
+@property (nonatomic,assign) CGFloat grows;
+
+@property (nonatomic,assign) CGFloat shrinks;
+
+- (instancetype)initWithNodes:(NSArray<FNFlexNode *> *)nodes
+                     axisSize:(CGFloat)axis
+                   normalSize:(CGFloat)normal
+                         grow:(CGFloat)grows
+                       shrink:(CGFloat)shrinks;
+- (void)fillLineSpace;
+
+- (void)fillSketch;
 @end
 NS_ASSUME_NONNULL_END
-
