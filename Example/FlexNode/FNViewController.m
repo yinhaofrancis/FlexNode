@@ -33,21 +33,20 @@
         if(i == 0){
             n.grow = 1;
         }
-//        for (int j = 0; j < 2; j ++) {
-//            FNFlexNode * nn = [[FNFlexNode alloc] init];
-//            [n addSubNode:nn];
-//            nn.width = 10;
+        for (int j = 0; j < 2; j ++) {
+            FNFlexNode * nn = [[FNFlexNode alloc] init];
+            [n addSubNode:nn];
+            nn.width = 5;
 //            nn.height = 10;
-//            if(i == 0){
-//                nn.grow = 1;
-//            }
-//        }
+            if(j == 0){
+                nn.grow = 1;
+            }
+        }
     }
 }
 
 - (IBAction)change:(id)sender {
     [self.node layout];
-    NSLog(@"%@",self.node);
 }
 
 @end

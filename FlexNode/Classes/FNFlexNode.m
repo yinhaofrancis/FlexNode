@@ -114,15 +114,14 @@
     self.y = backupLocation.origin.y;
     self.width = backupLocation.size.width;
     self.height = backupLocation.size.height;
+    [lines removeAllObjects];
 }
 
 -(void)fillSize{
     for (FNFlexLine *line in self.sublines) {
         [line fillLineSpace];
     }
-    for (FNFlexNode *node in self.subNode) {
-        [node fillSize];
-    }
+    
     if(self.lineJustify == FNFlexLayoutJustifyTypeStretch){
         CGFloat sketchSpace = 0;
         for (FNFlexLine *line in self.sublines) {
@@ -134,9 +133,28 @@
             line.normalSize += sketchSpace;
         }
     }
+   
     for (FNFlexLine *line in self.sublines) {
         [line fillSketch];
     }
+    if([self axisSizeWithDirection:self.direction] == 0){
+       CGFloat maxAx = 0;
+       for (FNFlexLine * line in self.sublines) {
+           maxAx = MAX(line.axisSize, maxAx);
+       }
+       [self setAxisSize:maxAx direction:self.direction];
+   }
+   if([self normalSizeWithDirection:self.direction] == 0){
+       CGFloat sumNor = 0;
+       for (FNFlexLine *line in self.sublines) {
+           sumNor += line.normalSize;
+       }
+       [self setNormalSize:sumNor direction:self.direction];
+   }
+    for (FNFlexNode *node in self.subNode) {
+        [node fillSize];
+    }
+
 }
 
 - (void)seperatedLine {
@@ -215,28 +233,17 @@
         line.ownNode = self;
         [lines addObject:line];
     }
-    if([self axisSizeWithDirection:self.direction] == 0){
-        CGFloat maxAx = 0;
-        for (FNFlexLine * line in self.sublines) {
-            maxAx = MAX(line.axisSize, maxAx);
-        }
-        [self setAxisSize:maxAx direction:self.direction];
-    }
-    if([self normalSizeWithDirection:self.direction] == 0){
-        CGFloat sumNor = 0;
-        for (FNFlexLine *line in self.sublines) {
-            sumNor += line.normalSize;
-        }
-        [self setNormalSize:sumNor direction:self.direction];
-    }
 }
 
 - (void)layout {
+    [self backup];
     [self layoutSize];
+    NSLog(@"%@",self);
+    [self recover];
 }
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ {%@}", NSStringFromCGRect(self.frame),self.sublines];
+    return [NSString stringWithFormat:@"node %@ {%@}", NSStringFromCGRect(self.frame),self.subNode];
 }
 @end
 
@@ -259,7 +266,7 @@
 }
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ a:%lf n:%lf,sp:%lf", self.subNode,self.axisSize,self.normalSize,self.space];
+    return [NSString stringWithFormat:@"line %@ a:%lf n:%lf,sp:%lf", self.subNode,self.axisSize,self.normalSize,self.space];
 }
 
 - (CGFloat)space{
