@@ -87,6 +87,11 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 - (instancetype)initWithView:(UIView *)view;
 
 - (instancetype)initWithLayer:(CALayer *)layer;
+
+- (instancetype)initWithAttributeString:(NSAttributedString *)aString size:(CGSize)size;
+
+- (instancetype)initWithImage:(UIImage *)image;
+
 @end
 
 @interface FNFlexLine : NSObject

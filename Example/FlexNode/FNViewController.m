@@ -18,14 +18,14 @@
 {
     [super viewDidLoad];
     self.node = [[FNFlexNode alloc] initWithView:[UIView new]];
-    self.node.width = 200;
-    self.node.height = 1000;
+    self.node.width = 600;
+    self.node.height = 500;
+    self.node.x = 10;
+    self.node.y = 20;
     self.node.wrap = true;
     self.node.lineJustify = FNFlexLayoutJustifyTypeStretch;
     [self.view addSubview:self.node.view];
-    self.node.view.frame = CGRectMake(10, 10, 1000, 100);
     self.node.align = FNFlexLayoutAlignTypeStretch;
-    
 //    self.node.direction = FNFlexLayoutDirectionTypeCol;
     for (int i = 0; i < 4; i ++) {
         CALayer * v = [CALayer new];
@@ -35,27 +35,31 @@
         FNFlexNode * n = [[FNFlexNode alloc] initWithLayer:v];
         [self.node addSubNode:n];
         n.justify = FNFlexLayoutJustifyTypeSpaceEvenly;
-        n.align = FNFlexLayoutAlignTypeFlexStart;
-        n.lineJustify = FNFlexLayoutJustifyTypeStretch;
-        n.width = 100;
+        n.align = FNFlexLayoutAlignTypeStretch;
+        n.lineJustify = FNFlexLayoutJustifyTypeFlexCenter;
+        n.width = 300;
+        n.direction = FNFlexLayoutDirectionTypeCol;
+//        n.height = 200;
         for (int j = 0; j < 2; j ++) {
-            CALayer * vd = [CALayer new];
-            vd.borderWidth = 1;
-            vd.backgroundColor = [[UIColor alloc] initWithRed:1 green:0.25 * i blue:0.25 * j alpha:1].CGColor;
-            FNFlexNode * nn = [[FNFlexNode alloc] initWithLayer:vd];
-            [n addSubNode:nn];
-            nn.width = 20;
-            nn.height = 20 + j * 10 + i * 20;
-            if(j == 0){
-                nn.grow = 1;
+            if(i < 2){
+                FNFlexNode* node = [[FNFlexNode alloc] initWithAttributeString:[NSAttributedString.alloc initWithString:@"adandas快捷的方式简单是对方开始绝代风华深刻的肌肤瞬间地方的肌肤来说地方了ansdkja sd" attributes:@{
+                    NSFontAttributeName:[UIFont systemFontOfSize:16],
+                    NSForegroundColorAttributeName:UIColor.blackColor
+                }] size:CGSizeMake(128, CGFLOAT_MAX)];
+                [n addSubNode:node];
+            }else{
+                FNFlexNode* node = [[FNFlexNode alloc] initWithImage:[UIImage imageNamed:@"p"]];
+                [n addSubNode:node];
             }
-          
         }
     }
 }
 
 - (IBAction)change:(id)sender {
     [self.node layout];
+    self.node.width = 1000;
+    self.node.align = FNFlexLayoutAlignTypeFlexCenter;
+    self.node.justify = FNFlexLayoutJustifyTypeFlexCenter;
 }
 
 @end

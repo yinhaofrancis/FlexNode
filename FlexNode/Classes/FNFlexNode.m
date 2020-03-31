@@ -23,6 +23,24 @@
 - (CGRect)frame{
     return CGRectMake(self.x, self.y, self.width, self.height);
 }
+- (void)contentSize{
+    if(self.view != nil){
+        
+        CGSize constraint = CGSizeMake(self.width == 0 ? CGFLOAT_MAX : self.width, self.height == 0 ? CGFLOAT_MAX : self.height);
+        
+        
+        CGSize size = [self.view systemLayoutSizeFittingSize:constraint];
+        if(size.width != 0){
+            self.width = size.width;
+        }
+        if(size.height != 0){
+            self.height = size.height;
+        }
+    }
+    for (FNFlexNode *node in self.subNode) {
+        [node contentSize];
+    }
+}
 //MARK:主轴方向 与 垂直主轴方向的确定
 - (void)setAxisSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
@@ -367,10 +385,12 @@
 //MARK:布局
 - (void)layout {
     [self backup];
+    self.view.frame = self.frame;
+    self.layer.frame = self.frame;
+    [self contentSize];
     [self layoutSize];
     [self layoutLocation];
     [self layoutComplete];
-    NSLog(@"%@",self);
     [self recover];
 }
 - (instancetype)initWithView:(UIView *)view
@@ -385,6 +405,31 @@
 {
     self = [super init];
     if (self) {
+        _layer = layer;
+    }
+    return self;
+}
+- (instancetype)initWithAttributeString:(NSAttributedString *)aString size:(CGSize)size{
+    self = [super init];
+    if(self){
+        CGRect rect = [aString boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        self.width = rect.size.width;
+        self.height = rect.size.height;
+        CATextLayer *text = [[CATextLayer alloc] init];
+        text.wrapped = true;
+        text.string = aString;
+        _layer = text;
+    }
+    return self;
+}
+
+- (instancetype)initWithImage:(UIImage *)image{
+    self = [super init];
+    if(self) {
+        self.width = image.size.width;
+        self.height = image.size.height;
+        CALayer * layer = [[CALayer alloc] init];
+        layer.contents = (__bridge id _Nullable)(image.CGImage);
         _layer = layer;
     }
     return self;

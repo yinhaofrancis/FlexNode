@@ -6,11 +6,11 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-
+#import "FNFlexNode.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FNFlexNodeLayer : CALayer
-
+@property (nonatomic, nonnull) FNFlexNode *node;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,5 +8,7 @@
 #import "FNFlexNodeLayer.h"
 
 @implementation FNFlexNodeLayer
-
+- (void)layoutSublayers {
+    [self.node layout];
+}
 @end
