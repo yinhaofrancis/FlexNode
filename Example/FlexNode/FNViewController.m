@@ -17,30 +17,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.node = [[FNFlexNode alloc] init];
-    self.node.width = 1000;
+    self.node = [[FNFlexNode alloc] initWithView:[UIView new]];
+    self.node.width = 200;
     self.node.height = 1000;
     self.node.wrap = true;
     self.node.lineJustify = FNFlexLayoutJustifyTypeStretch;
+    [self.view addSubview:self.node.view];
     self.node.align = FNFlexLayoutAlignTypeStretch;
     
 //    self.node.direction = FNFlexLayoutDirectionTypeCol;
-    for (int i = 0; i < 2; i ++) {
-        FNFlexNode * n = [[FNFlexNode alloc] init];
+    for (int i = 0; i < 4; i ++) {
+        CALayer * v = [CALayer new];
+//        v.borderColor = UIColor.redColor.CGColor;
+//        v.borderWidth = 2;
+        v.backgroundColor = [[UIColor alloc] initWithRed:0.25 * i green:1 blue:1 alpha:1].CGColor;
+        FNFlexNode * n = [[FNFlexNode alloc] initWithLayer:v];
         [self.node addSubNode:n];
-        n.width = 10;
-//        n.height = 10;
-        if(i == 0){
-            n.grow = 1;
-        }
+        n.justify = FNFlexLayoutJustifyTypeSpaceEvenly;
+        n.align = FNFlexLayoutAlignTypeFlexCenter;
+        n.lineJustify = FNFlexLayoutJustifyTypeStretch;
+        n.width = 100;
         for (int j = 0; j < 2; j ++) {
-            FNFlexNode * nn = [[FNFlexNode alloc] init];
+            CALayer * vd = [CALayer new];
+            vd.borderWidth = 1;
+            vd.backgroundColor = [[UIColor alloc] initWithRed:1 green:0.25 * i blue:0.25 * j alpha:1].CGColor;
+            FNFlexNode * nn = [[FNFlexNode alloc] initWithLayer:vd];
             [n addSubNode:nn];
-            nn.width = 5;
-//            nn.height = 10;
+            nn.width = 20;
+            nn.height = 20;
             if(j == 0){
                 nn.grow = 1;
             }
+          
         }
     }
 }

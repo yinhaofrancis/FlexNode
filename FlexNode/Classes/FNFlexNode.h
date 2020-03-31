@@ -38,7 +38,8 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 @class FNFlexLine;
 
 @interface FNFlexNode : NSObject
-
+@property(nonatomic,readonly) UIView *view;
+@property(nonatomic,readonly) CALayer *layer;
 @property(nonatomic,readonly) CGRect frame;
 @property(nonatomic,assign) CGFloat x;
 @property(nonatomic,assign) CGFloat y;
@@ -83,6 +84,9 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 
 - (void)backup;
 
+- (instancetype)initWithView:(UIView *)view;
+
+- (instancetype)initWithLayer:(CALayer *)layer;
 @end
 
 @interface FNFlexLine : NSObject

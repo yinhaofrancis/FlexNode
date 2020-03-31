@@ -3,6 +3,5 @@ source 'https://github.com/yinhaofrancis/YHSpec.git'
 platform :ios, '9.0'
 
 target 'FlexNode_Example' do
-  pod 'Ham/Render'
   pod 'FlexNode', :path => '../'
 end

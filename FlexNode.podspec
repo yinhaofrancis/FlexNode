@@ -39,5 +39,4 @@ iOS Flex 布局库 部分flex 属性支持
    s.public_header_files = 'FlexNode/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'Ham'
 end
