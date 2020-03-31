@@ -23,6 +23,7 @@
     self.node.wrap = true;
     self.node.lineJustify = FNFlexLayoutJustifyTypeStretch;
     [self.view addSubview:self.node.view];
+    self.node.view.frame = CGRectMake(10, 10, 1000, 100);
     self.node.align = FNFlexLayoutAlignTypeStretch;
     
 //    self.node.direction = FNFlexLayoutDirectionTypeCol;
@@ -34,7 +35,7 @@
         FNFlexNode * n = [[FNFlexNode alloc] initWithLayer:v];
         [self.node addSubNode:n];
         n.justify = FNFlexLayoutJustifyTypeSpaceEvenly;
-        n.align = FNFlexLayoutAlignTypeFlexCenter;
+        n.align = FNFlexLayoutAlignTypeFlexStart;
         n.lineJustify = FNFlexLayoutJustifyTypeStretch;
         n.width = 100;
         for (int j = 0; j < 2; j ++) {
@@ -44,7 +45,7 @@
             FNFlexNode * nn = [[FNFlexNode alloc] initWithLayer:vd];
             [n addSubNode:nn];
             nn.width = 20;
-            nn.height = 20;
+            nn.height = 20 + j * 10 + i * 20;
             if(j == 0){
                 nn.grow = 1;
             }
