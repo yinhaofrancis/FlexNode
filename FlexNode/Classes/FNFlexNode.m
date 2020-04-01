@@ -530,6 +530,15 @@
     }
     return flexnode;
 }
++ (SEL)propertyNode:(NSString *)name{
+    if([name isEqualToString:@"self.Content"]){
+        return @selector(setContentLayer:);
+    }
+    if([name isEqualToString:@"self.SubNode"]){
+        return @selector(addSubNode:);
+    }
+    return nil;
+}
 //MARK:查找Node
 - (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name{
     NSMutableArray<FNFlexNode *> *nodes = [NSMutableArray new];

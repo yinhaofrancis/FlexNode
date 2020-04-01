@@ -1,220 +1,332 @@
 <Node width="320" height="480" justify="spaceEvenly" lineJustify="flexEnd" wrap="true">
-    <Layer backgroundColor="0xfe4332ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds="true"/>
-    <SubNode>
+    <self.Content>
+        <Layer backgroundColor="0xfe4332ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds="true"/>
+    </self.Content>
+    <self.SubNode>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1} ">
-            <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspect"/>
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspect"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
             
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
-            <Layer backgroundColor="0x34Fe00ff" />
-            <SubNode>
+            <self.Content>
+                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+            </self.Content>
+            <self.SubNode>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
                 </Node>
                 <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <Layer backgroundColor="0x3465ffff" />
+                    <self.Content>
+                        <self.Content>
+                        <Layer backgroundColor="0x3465ffff" />
+                    </self.Content>
+                    </self.Content>
                 </Node>
-            </SubNode>
+            </self.SubNode>
              
         </Node>
-    </SubNode>
+    </self.SubNode>
 </Node>

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)nodeWithXMLAttribute:(NSDictionary<NSString *,NSString *> *)attribute;
 
++ (SEL)propertyNode:(NSString *)name;
+
 @end
 @interface FNXMLParser : NSObject<NSXMLParserDelegate>
 - (void)parseNode:(NSURL *)fileURL handle:(void (^)(NSError * e,FNFlexNode *node))callback;

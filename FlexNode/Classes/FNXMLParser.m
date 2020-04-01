@@ -10,7 +10,8 @@
 #import "CALayer+FlexXml.h"
 @implementation FNXMLParser{
     FNFlexNode* root;
-    NSMutableArray<FNFlexNode *> *currentNodes;
+    NSMutableArray *currentElement;
+    NSMutableArray *propertyElement;
     void (^callback)(NSError * _Nullable, FNFlexNode * _Nullable);
     NSInteger subNode;
 }
@@ -18,7 +19,8 @@
 {
     self = [super init];
     if (self) {
-        currentNodes = [NSMutableArray new];
+        currentElement = [NSMutableArray new];
+        propertyElement = [NSMutableArray new];
     }
     return self;
 }
@@ -36,35 +38,42 @@
     callback(nil,root);
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-    if([elementName isEqualToString:@"Node"]){
-        FNFlexNode* node = [FNFlexNode nodeWithXMLAttribute:attributeDict];
-        if(root == nil){
-            root = currentNodes.firstObject;
+    if([elementName containsString:@"."]){ //属性节点切换
+        id item = currentElement.firstObject;
+        SEL call = [[item class] propertyNode:elementName];
+        [propertyElement addObject:NSStringFromSelector(call)];
+    }else{ //普通节点
+        Class cls = [self elementNameMapClass:elementName];
+        id element = [cls nodeWithXMLAttribute:attributeDict];
+        if(propertyElement.count > 0){
+            [currentElement.lastObject performSelector:NSSelectorFromString(propertyElement.lastObject) withObject:element];
         }
-        if(subNode){
-            [currentNodes.lastObject addSubNode:node];
+        [currentElement addObject:element];
+        if(!root){
+            root = element;
         }
-        [currentNodes addObject:node];
-    }
-    if([elementName isEqualToString:@"SubNode"]){
-        subNode += 1;
-    }
-    if ([elementName isEqualToString:@"Layer"]){
-        CALayer* layer = [CALayer nodeWithXMLAttribute:attributeDict];
-        [currentNodes.lastObject setContentLayer:layer];
     }
     
     
 }
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    if([elementName isEqualToString:@"Node"]){
-        [currentNodes removeLastObject];
-    }
-    if([elementName isEqualToString:@"SubNode"]){
-        subNode -= 1;
+    if([elementName containsString:@"."]){ //属性节点切换
+        [propertyElement removeLastObject];
+    }else{ //普通节点
+        [currentElement removeLastObject];
     }
 }
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
     NSLog(@"%@",parseError);
+}
+
+- (Class) elementNameMapClass:(NSString *)elementName{
+    if([elementName isEqualToString:@"Node"]){
+        return [FNFlexNode class];
+    }
+    if([elementName isEqualToString:@"Layer"]){
+        return [CALayer class];
+    }
+    return NSClassFromString(elementName);
 }
 @end
