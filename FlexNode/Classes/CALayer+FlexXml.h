@@ -7,18 +7,26 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FNXMLParser.h"
+#import "FNFlexNode.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CALayer (FlexXml)<FNXMLElement>
+@interface CALayer (FlexXml)<FNXMLElement,FNFlexNodeContentProtocol>
 
 @end
 
+@interface CATextLayer (FlexXml)<FNXMLElement>
+
+@end
 @interface UIColor (FlexXml)
 - (instancetype)initWithHex:(uint32_t)hexColor;
 @end
 
 @interface UIImage (FlexXml)
 + (instancetype)imageWithXmlValue:(NSString *)imageValue;
+@end
+
+@interface NSAttributedString (FlexXml)<FNXMLElement>
+
 @end
 
 NS_ASSUME_NONNULL_END

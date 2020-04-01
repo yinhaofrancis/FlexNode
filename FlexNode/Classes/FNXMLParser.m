@@ -41,7 +41,12 @@
     if([elementName containsString:@"."]){ //属性节点切换
         id item = currentElement.firstObject;
         SEL call = [[item class] propertyNode:elementName];
-        [propertyElement addObject:NSStringFromSelector(call)];
+        if(call != nil){
+            [propertyElement addObject:NSStringFromSelector(call)];
+        }else{
+            [propertyElement addObject:@" "];
+        }
+        
     }else{ //普通节点
         Class cls = [self elementNameMapClass:elementName];
         id element = [cls nodeWithXMLAttribute:attributeDict];
@@ -73,6 +78,9 @@
     }
     if([elementName isEqualToString:@"Layer"]){
         return [CALayer class];
+    }
+    if([elementName isEqualToString:@"Text"]){
+        return [CATextLayer class];
     }
     return NSClassFromString(elementName);
 }

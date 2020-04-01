@@ -6,7 +6,7 @@
 //
 
 #import "FNFlexNode.h"
-
+#import "CALayer+FlexXml.h"
 @implementation FNFlexNode{
     NSMutableArray<FNFlexNode *> *_nodes;
     
@@ -24,17 +24,26 @@
     return CGRectMake(self.x, self.y, self.width, self.height);
 }
 - (void)contentSize{
+    CGSize constraint = CGSizeMake(self.width == 0 ? CGFLOAT_MAX : self.width - self.margin.left - self.margin.right, self.height == 0 ? CGFLOAT_MAX : self.height - self.margin.top - self.margin.bottom);
     if(self.view != nil){
-        
-        CGSize constraint = CGSizeMake(self.width == 0 ? CGFLOAT_MAX : self.width, self.height == 0 ? CGFLOAT_MAX : self.height);
-        
-        
         CGSize size = [self.view systemLayoutSizeFittingSize:constraint];
-        if(size.width != 0){
+        if(size.width != 0 && self.width == 0){
             self.width = size.width;
         }
-        if(size.height != 0){
+        if(size.height != 0 && self.height == 0){
             self.height = size.height;
+        }
+    }
+    if(self.layer != nil || self.view == nil){
+        CGSize size = [self.layer FlexNodeContentSize:constraint];
+        if(size.width != 0 && self.width == 0){
+            self.width = size.width;
+        }
+        if(size.height != 0 && self.height == 0){
+            self.height = size.height;
+        }
+        if([self.layer isKindOfClass:CATextLayer.class]){
+            NSLog(@"autoSize %@",NSStringFromCGSize(size));
         }
     }
     for (FNFlexNode *node in self.subNode) {
@@ -130,18 +139,25 @@
     for (FNFlexNode *node in self.subNode) {
         [node backup];
     }
+    if([self.layer isKindOfClass:CATextLayer.class]){
+        NSLog(@"backup %@",NSStringFromCGRect(self.frame));
+    }
+    
     backupLocation = CGRectMake(self.x, self.y, self.width, self.height);
 }
 - (void)recover{
     for (FNFlexNode *node in self.subNode) {
         [node recover];
     }
-    backupLocation = CGRectMake(self.x, self.y, self.width, self.height);
+//    backupLocation = CGRectMake(self.x, self.y, self.width, self.height);
     self.x = backupLocation.origin.x;
     self.y = backupLocation.origin.y;
     self.width = backupLocation.size.width;
     self.height = backupLocation.size.height;
     [lines removeAllObjects];
+    if([self.layer isKindOfClass:CATextLayer.class]){
+        NSLog(@"recover %@",NSStringFromCGRect(self.frame));
+    }
 }
 //MARK:确定尺寸
 - (void)layoutSize {
@@ -384,7 +400,9 @@
 }
 - (void)layoutComplete{
     CGRect rect = self.frame;
-    
+    if([self.layer isKindOfClass:CATextLayer.class]){
+        NSLog(@"result %@",NSStringFromCGRect(rect));
+    }
     self.view.frame = rect;
     self.layer.frame = rect;
     for (FNFlexNode *node in self.subNode) {
@@ -393,9 +411,9 @@
 }
 //MARK:布局
 - (void)layout {
-    [self backup];
     self.view.frame = self.frame;
     self.layer.frame = self.frame;
+    [self backup];
     [self contentSize];
     [self layoutSize];
     [self layoutLocation];

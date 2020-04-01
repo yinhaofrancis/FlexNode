@@ -38,7 +38,9 @@
             l.shadowOpacity = value.doubleValue;
         }
         if([key isEqualToString:@"shadowColor"]){
-            l.shadowColor = [[UIColor alloc] initWithHex:value.intValue].CGColor;
+            uint32_t hex = 0;
+            [[NSScanner scannerWithString:value] scanHexInt:&hex];
+            l.shadowColor = [[UIColor alloc] initWithHex:hex].CGColor;
         }
         if([key isEqualToString:@"shadowOffset"]){
             l.shadowOffset = CGSizeFromString(value);
@@ -51,6 +53,65 @@
     l.contentsScale = UIScreen.mainScreen.scale;
     return l;
 }
+
++ (nonnull SEL)propertyNode:(nonnull NSString *)name {
+    return nil;
+}
+- (CGSize)FlexNodeContentSize:(CGSize)constaintSize{
+    if(self.contents){
+        CGImageRef img = (__bridge CGImageRef)(self.contents);
+        CGSize size = CGSizeMake(CGImageGetWidth(img) / UIScreen.mainScreen.scale  , CGImageGetHeight(img) / UIScreen.mainScreen.scale );
+        return CGSizeMake(MIN(size.width, constaintSize.width), MIN(size.height, constaintSize.height));
+    }
+    return constaintSize;
+}
+@end
+
+@implementation CATextLayer (FlexXml)
+
++ (instancetype)nodeWithXMLAttribute:(NSDictionary<NSString *,NSString *> *)attribute{
+    CATextLayer *layer = [super nodeWithXMLAttribute:attribute];
+    for (NSString* key in attribute) {
+        NSString* value = attribute[key];
+        if([key isEqualToString:@"string"]){
+            layer.string = value;
+        }
+        if([key isEqualToString:@"fontSize"]){
+            layer.fontSize = value.doubleValue;
+        }
+        if([key isEqualToString:@"foregroundColor"]){
+            uint32_t hex = 0;
+            [[NSScanner scannerWithString:value] scanHexInt:&hex];
+            layer.foregroundColor = [[UIColor alloc] initWithHex:hex].CGColor;
+        }
+        if([key isEqualToString:@"wrapped"]){
+            layer.wrapped = value.boolValue;
+        }
+        if([key isEqualToString:@"truncationMode"]){
+            layer.truncationMode = value;
+        }
+        if ([key isEqualToString:@"alignmentMode"]){
+            layer.alignmentMode = value;
+        }
+    }
+    return layer;
+}
+- (CGSize)FlexNodeContentSize:(CGSize)constaintSize{
+    if(self.string && [self.string isKindOfClass:NSAttributedString.class]){
+        NSAttributedString* str = self.string;
+        CGRect rect = [str boundingRectWithSize:constaintSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        
+        return rect.size;
+    }else if (self.string){
+        NSAttributedString* str = [[NSAttributedString alloc] initWithString:self.string attributes:@{
+            NSFontAttributeName:[UIFont systemFontOfSize:self.fontSize]
+        }];
+        CGRect rect = [str boundingRectWithSize:constaintSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        return rect.size;
+    }
+    return constaintSize;
+}
+
 @end
 
 @implementation UIColor (FlexXml)
@@ -79,3 +140,23 @@
     return nil;
 }
 @end
+
+
+@implementation NSAttributedString(FlexXml)
+
+
+
++ (nonnull instancetype)nodeWithXMLAttribute:(nonnull NSDictionary<NSString *,NSString *> *)attribute {
+    return nil;
+}
+
++ (nonnull SEL)propertyNode:(nonnull NSString *)name { 
+    return nil;
+}
+
+
+
+
+@end
+
+

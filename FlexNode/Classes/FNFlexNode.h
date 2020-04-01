@@ -38,6 +38,12 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 };
 @class FNFlexLine;
 
+@protocol FNFlexNodeContentProtocol <NSObject>
+
+- (CGSize)FlexNodeContentSize:(CGSize)constaintSize;
+
+@end
+
 @interface FNFlexNode : NSObject<FNXMLElement>
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,readonly) UIView *view;

@@ -20,17 +20,17 @@
                 </Node>
             </self.SubNode>
         </Node>
-        <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
+        <Node margin="{1,1,1,1}">
             <self.Content>
                 <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspect"/>
             </self.Content>
             <self.SubNode>
-                <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
+                <Node name="seed" width="5" height="5">
                     <self.Content>
                         <Layer backgroundColor="0x3465ffff" />
                     </self.Content>
                 </Node>
-                <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
+                <Node name="seed" width="5" height="5">
                     <self.Content>
                         <Layer backgroundColor="0x3465ffff" />
                     </self.Content>
@@ -308,25 +308,10 @@
             </self.SubNode>
              
         </Node>
-        <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
+        <Node margin="{1,1,1,1}">
             <self.Content>
-                <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspectFill" masksToBounds = "true"/>
+                <Text backgroundColor="0xFFFFFFFF" string="hello flex world" wrapped="true" foregroundColor="0x00ff00ff" fontSize="10" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
             </self.Content>
-            <self.SubNode>
-                <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <self.Content>
-                        <Layer backgroundColor="0x3465ffff" />
-                    </self.Content>
-                </Node>
-                <Node name="seed" width="5" height="5" margin="{1,1,1,1}">
-                    <self.Content>
-                        <self.Content>
-                        <Layer backgroundColor="0x3465ffff" />
-                    </self.Content>
-                    </self.Content>
-                </Node>
-            </self.SubNode>
-             
         </Node>
     </self.SubNode>
 </Node>
