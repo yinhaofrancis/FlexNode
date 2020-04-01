@@ -18,6 +18,7 @@
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		A905AA23243428390009197B /* FNScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A905AA22243428390009197B /* FNScrollViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		774556CD83CC727BFCF9E11C /* Pods_FlexNode_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlexNode_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A905AA21243428390009197B /* FNScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FNScrollViewController.h; sourceTree = "<group>"; };
+		A905AA22243428390009197B /* FNScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FNScrollViewController.m; sourceTree = "<group>"; };
 		B118412095A02507F7A73631 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +106,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* FNViewController.h */,
 				6003F5A6195388D20070C39A /* FNViewController.m */,
+				A905AA21243428390009197B /* FNScrollViewController.h */,
+				A905AA22243428390009197B /* FNScrollViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -174,6 +179,11 @@
 				CLASSPREFIX = FN;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = yinhaoFrancis;
+				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = XS4AM96H8J;
+					};
+				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "FlexNode" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -257,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* FNAppDelegate.m in Sources */,
+				A905AA23243428390009197B /* FNScrollViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* FNViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -390,6 +401,7 @@
 			baseConfigurationReference = 2646763D0D3BA044051C10A2 /* Pods-FlexNode_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XS4AM96H8J;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexNode/FlexNode-Prefix.pch";
 				INFOPLIST_FILE = "FlexNode/FlexNode-Info.plist";
@@ -406,6 +418,7 @@
 			baseConfigurationReference = 324751B3DD525FDEC64FE42C /* Pods-FlexNode_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XS4AM96H8J;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexNode/FlexNode-Prefix.pch";
 				INFOPLIST_FILE = "FlexNode/FlexNode-Info.plist";

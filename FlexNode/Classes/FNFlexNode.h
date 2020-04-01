@@ -10,20 +10,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, FNFlexLayoutJustifyType) {
+    FNFlexLayoutJustifyTypeStretch,
     FNFlexLayoutJustifyTypeFlexStart,
     FNFlexLayoutJustifyTypeFlexCenter,
     FNFlexLayoutJustifyTypeFlexEnd,
     FNFlexLayoutJustifyTypeSpaceAround,
     FNFlexLayoutJustifyTypeSpaceEvenly,
     FNFlexLayoutJustifyTypeSpaceBetween,
-    FNFlexLayoutJustifyTypeStretch
 };
 
 typedef NS_ENUM(NSUInteger, FNFlexLayoutAlignType) {
+    FNFlexLayoutAlignTypeStretch,
     FNFlexLayoutAlignTypeFlexStart,
     FNFlexLayoutAlignTypeFlexCenter,
     FNFlexLayoutAlignTypeFlexEnd,
-    FNFlexLayoutAlignTypeStretch,
+    
 };
 
 typedef NS_ENUM(NSUInteger, FNFlexLayoutDirectionType) {
@@ -38,24 +39,24 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 @class FNFlexLine;
 
 @interface FNFlexNode : NSObject
-@property(nonatomic,readonly) UIView *view;
-@property(nonatomic,readonly) CALayer *layer;
-@property(nonatomic,readonly) CGRect frame;
-@property(nonatomic,assign) CGFloat x;
-@property(nonatomic,assign) CGFloat y;
-@property(nonatomic,assign) CGFloat width;
-@property(nonatomic,assign) CGFloat height;
-@property(nonatomic,readonly) NSArray<FNFlexNode *> *subNode;
-@property(nonatomic,readonly) NSArray<FNFlexLine *> *sublines;
-@property(nonatomic,readonly)  FNFlexNode *superNode;
-@property(nonatomic,assign) FNFlexLayoutDirectionType direction;
-@property(nonatomic,assign) FNFlexLayoutAlignType align;
-@property(nonatomic,assign) FNFlexLayoutJustifyType justify;
-@property(nonatomic,assign) FNFlexLayoutJustifyType lineJustify;
-@property(nonatomic,assign) BOOL wrap;
+@property (nonatomic,readonly) UIView *view;
+@property (nonatomic,readonly) CALayer *layer;
+@property (nonatomic,readonly) CGRect frame;
+@property (nonatomic,assign) CGFloat x;
+@property (nonatomic,assign) CGFloat y;
+@property (nonatomic,assign) CGFloat width;
+@property (nonatomic,assign) CGFloat height;
+@property (nonatomic,readonly) NSArray<FNFlexNode *> *subNode;
+@property (nonatomic,readonly) NSArray<FNFlexLine *> *sublines;
+@property (nonatomic,readonly)  FNFlexNode *superNode;
+@property (nonatomic,assign) FNFlexLayoutDirectionType direction;
+@property (nonatomic,assign) FNFlexLayoutAlignType align;
+@property (nonatomic,assign) FNFlexLayoutJustifyType justify;
+@property (nonatomic,assign) FNFlexLayoutJustifyType lineJustify;
+@property (nonatomic,assign) BOOL wrap;
 @property (nonatomic,assign) CGFloat grow;
-
 @property (nonatomic,assign) CGFloat shrink;
+@property (nonatomic,assign) UIEdgeInsets margin;
 
 - (void) setAxisLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction;
 
@@ -81,8 +82,6 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 - (void)seperatedLine;
 
 - (void)fillSize;
-
-- (void)backup;
 
 - (instancetype)initWithView:(UIView *)view;
 

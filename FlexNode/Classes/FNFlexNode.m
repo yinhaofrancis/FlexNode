@@ -44,59 +44,59 @@
 //MARK:主轴方向 与 垂直主轴方向的确定
 - (void)setAxisSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        self.width = size;
+        self.width = size - self.margin.left - self.margin.right;
     }else{
-        self.height = size;
+        self.height = size - self.margin.top - self.margin.bottom;
     }
 }
 - (void)setNormalSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        self.height = size;
+        self.height = size - self.margin.top - self.margin.bottom;
     }else{
-        self.width = size;
+        self.width = size - self.margin.left - self.margin.right;
     }
 }
 - (void)setAxisLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        self.x = location;
+        self.x = location + self.margin.left;
     }else{
-        self.y = location;
+        self.y = location + self.margin.top;
     }
 }
 - (void)setNormalLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        self.y = location;
+        self.y = location + self.margin.top;
     }else{
-        self.x = location;
+        self.x = location + self.margin.left;
     }
 }
 
 - (CGFloat)axisSizeWithDirection:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        return self.width;
+        return self.width + self.margin.left + self.margin.right;
     }else{
-        return self.height;
+        return self.height + self.margin.top + self.margin.bottom;
     }
 }
 - (CGFloat)axisLocationWithDirection:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        return self.x;
+        return self.x - self.margin.left;
     }else{
-        return self.y;
+        return self.y - self.margin.top;
     }
 }
 - (CGFloat)normalSizeWithDirection:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        return self.height;
+        return self.height + self.margin.top + self.margin.bottom;
     }else{
-        return self.width;
+        return self.width + self.margin.left + self.margin.right;
     }
 }
 - (CGFloat)normalLocationWithDirection:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
-        return self.y;
+        return self.y - self.margin.top;
     }else{
-        return self.x;
+        return self.x - self.margin.left;
     }
 }
 //MARK:树形结构
@@ -376,8 +376,10 @@
     [self layoutItemLocation];
 }
 - (void)layoutComplete{
-    self.view.frame = self.frame;
-    self.layer.frame = self.frame;
+    CGRect rect = self.frame;
+    
+    self.view.frame = rect;
+    self.layer.frame = rect;
     for (FNFlexNode *node in self.subNode) {
         [node layoutComplete];
     }
@@ -416,6 +418,7 @@
         self.width = rect.size.width;
         self.height = rect.size.height;
         CATextLayer *text = [[CATextLayer alloc] init];
+        text.contentsScale = UIScreen.mainScreen.scale;
         text.wrapped = true;
         text.string = aString;
         _layer = text;
@@ -429,6 +432,7 @@
         self.width = image.size.width;
         self.height = image.size.height;
         CALayer * layer = [[CALayer alloc] init];
+        layer.contentsScale = UIScreen.mainScreen.scale;
         layer.contents = (__bridge id _Nullable)(image.CGImage);
         _layer = layer;
     }
