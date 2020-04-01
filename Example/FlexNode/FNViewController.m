@@ -8,8 +8,10 @@
 
 #import "FNViewController.h"
 #import <FNFlexNode.h>
+#import "FNXMLParser.h"
 @interface FNViewController ()
 @property (nonnull,nonatomic) FNFlexNode *node;
+@property (nonatomic,strong) FNXMLParser* parser;
 @end
 
 @implementation FNViewController
@@ -17,49 +19,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.node = [[FNFlexNode alloc] initWithView:[UIView new]];
-    self.node.width = 600;
-    self.node.height = 500;
-    self.node.x = 10;
-    self.node.y = 20;
-    self.node.wrap = true;
-    self.node.lineJustify = FNFlexLayoutJustifyTypeStretch;
-    [self.view addSubview:self.node.view];
-    self.node.align = FNFlexLayoutAlignTypeStretch;
-//    self.node.direction = FNFlexLayoutDirectionTypeCol;
-    for (int i = 0; i < 4; i ++) {
-        CALayer * v = [CALayer new];
-//        v.borderColor = UIColor.redColor.CGColor;
-//        v.borderWidth = 2;
-        v.backgroundColor = [[UIColor alloc] initWithRed:0.25 * i green:1 blue:1 alpha:1].CGColor;
-        FNFlexNode * n = [[FNFlexNode alloc] initWithLayer:v];
-        [self.node addSubNode:n];
-        n.justify = FNFlexLayoutJustifyTypeSpaceEvenly;
-        n.align = FNFlexLayoutAlignTypeStretch;
-        n.lineJustify = FNFlexLayoutJustifyTypeFlexCenter;
-        n.width = 300;
-        n.direction = FNFlexLayoutDirectionTypeCol;
-//        n.height = 200;
-        for (int j = 0; j < 2; j ++) {
-            if(i < 2){
-                FNFlexNode* node = [[FNFlexNode alloc] initWithAttributeString:[NSAttributedString.alloc initWithString:@"adandas快捷的方式简单是对方开始绝代风华深刻的肌肤瞬间地方的肌肤来说地方了ansdkja sd" attributes:@{
-                    NSFontAttributeName:[UIFont systemFontOfSize:16],
-                    NSForegroundColorAttributeName:UIColor.blackColor
-                }] size:CGSizeMake(128, CGFLOAT_MAX)];
-                [n addSubNode:node];
-            }else{
-                FNFlexNode* node = [[FNFlexNode alloc] initWithImage:[UIImage imageNamed:@"p"]];
-                [n addSubNode:node];
-            }
-        }
-    }
+    
+    self.parser = [[FNXMLParser alloc] init];
+    __weak FNViewController* wself = self;
+    [self.parser parseNode:[NSBundle.mainBundle URLForResource:@"layout" withExtension:@"xml"] handle:^(NSError * _Nonnull e, FNFlexNode * _Nonnull node) {
+        wself.node = node;
+        [wself.view.layer addSublayer:node.layer];
+        node.x = 200;
+        node.y = 123;
+        [wself.node layout];
+    }];
 }
 
-- (IBAction)change:(id)sender {
+- (IBAction)change:(UISlider *)sender {
+    [[self.node findNodeByName:@"sub"] enumerateObjectsUsingBlock:^(FNFlexNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.width = sender.value;
+        obj.wrap = true;
+    }];
+    [[self.node findNodeByName:@"seed"] enumerateObjectsUsingBlock:^(FNFlexNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.width = sender.value / 3;
+        obj.height = sender.value / 3;
+    }];
     [self.node layout];
-    self.node.width = 1000;
-    self.node.align = FNFlexLayoutAlignTypeFlexCenter;
-    self.node.justify = FNFlexLayoutJustifyTypeFlexCenter;
 }
 
 @end

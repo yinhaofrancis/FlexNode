@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FNXMLParser.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, FNFlexLayoutJustifyType) {
@@ -38,7 +38,8 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 };
 @class FNFlexLine;
 
-@interface FNFlexNode : NSObject
+@interface FNFlexNode : NSObject<FNXMLElement>
+@property (nonatomic,copy) NSString* name;
 @property (nonatomic,readonly) UIView *view;
 @property (nonatomic,readonly) CALayer *layer;
 @property (nonatomic,readonly) CGRect frame;
@@ -91,6 +92,9 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 
 - (instancetype)initWithImage:(UIImage *)image;
 
+- (void)setContentLayer:(CALayer *)layer;
+
+- (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name;
 @end
 
 @interface FNFlexLine : NSObject

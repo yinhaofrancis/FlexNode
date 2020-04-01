@@ -41,6 +41,13 @@
         [node contentSize];
     }
 }
+- (void)setContentLayer:(CALayer *)layer{
+    if(_layer){
+        [_layer removeFromSuperlayer];
+    }
+    _layer = layer;
+    [self.superNode.layer addSublayer:layer];
+}
 //MARK:主轴方向 与 垂直主轴方向的确定
 - (void)setAxisSize:(CGFloat)size direction:(FNFlexLayoutDirectionType)direction{
     if(direction == FNFlexLayoutDirectionTypeRow){
@@ -449,6 +456,90 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"node %@ {%@}", NSStringFromCGRect(self.frame),self.subNode];
+}
+//MARK:xml
+
++ (instancetype)nodeWithXMLAttribute:(NSDictionary<NSString *,NSString *> *)attribute{
+    FNFlexNode *flexnode = [FNFlexNode new];
+    for (NSString *node in attribute) {
+        NSString * att = attribute[node];
+        if([node isEqualToString:@"width"]){
+            flexnode.width = [att doubleValue];
+        }else if([node isEqualToString:@"height"]){
+            flexnode.height = [att doubleValue];
+        }else if([node isEqualToString:@"justify"]){
+            if([att isEqualToString:@"flexCenter"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeFlexCenter;
+            }else if ([att isEqualToString:@"flexEnd"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeFlexEnd;
+            }else if ([att isEqualToString:@"spaceArround"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeSpaceAround;
+            }else if ([att isEqualToString:@"spaceEvenly"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeSpaceEvenly;
+            }else if ([att isEqualToString:@"spaceBetween"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeSpaceBetween;
+            }else if ([att isEqualToString:@"stretch"]){
+                flexnode.justify = FNFlexLayoutJustifyTypeStretch;
+            }else{
+                flexnode.justify = FNFlexLayoutJustifyTypeFlexStart;
+            }
+        }else if([node isEqualToString:@"align"]){
+            if([att isEqualToString:@"flexCenter"]){
+                flexnode.align = FNFlexLayoutAlignTypeFlexCenter;
+            }else if ([att isEqualToString:@"flexEnd"]){
+                flexnode.align = FNFlexLayoutAlignTypeFlexEnd;
+            }else if ([att isEqualToString:@"stretch"]){
+                flexnode.align = FNFlexLayoutAlignTypeStretch;
+            }else{
+                flexnode.align = FNFlexLayoutAlignTypeFlexStart;
+            }
+        }else if([node isEqualToString:@"lineJustify"]){
+            if([att isEqualToString:@"flexCenter"]){
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeFlexCenter;
+            }else if ([att isEqualToString:@"flexEnd"]){
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeFlexEnd;
+            }else if ([att isEqualToString:@"spaceArround"]){
+                flexnode.lineJustify= FNFlexLayoutJustifyTypeSpaceAround;
+            }else if ([att isEqualToString:@"spaceEvenly"]){
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeSpaceEvenly;
+            }else if ([att isEqualToString:@"spaceBetween"]){
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeSpaceBetween;
+            }else if ([att isEqualToString:@"stretch"]){
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeStretch;
+            }else{
+                flexnode.lineJustify = FNFlexLayoutJustifyTypeFlexStart;
+            }
+            
+        }else if([node isEqualToString:@"direction"]){
+            if([att isEqualToString:@"col"]){
+                flexnode.direction = FNFlexLayoutDirectionTypeCol;
+            }else{
+                flexnode.direction = FNFlexLayoutDirectionTypeRow;
+            }
+        }else if([node isEqualToString:@"grow"]){
+            flexnode.grow = [att doubleValue];
+        }else if([node isEqualToString:@"shrink"]){
+            flexnode.shrink = [att doubleValue];
+        }else if([node isEqualToString:@"wrap"]){
+            flexnode.wrap = [att boolValue];
+        }else if([node isEqualToString:@"margin"]){
+            flexnode.margin = UIEdgeInsetsFromString(att);
+        }else{
+            [flexnode setValue:att forKey:node];
+        }
+    }
+    return flexnode;
+}
+//MARK:查找Node
+- (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name{
+    NSMutableArray<FNFlexNode *> *nodes = [NSMutableArray new];
+    for (FNFlexNode *node in self.subNode) {
+        if([node.name isEqualToString:name]){
+            [nodes addObject:node];
+        }
+        [nodes addObjectsFromArray:[node findNodeByName:name]];
+    }
+    return nodes;
 }
 @end
 
