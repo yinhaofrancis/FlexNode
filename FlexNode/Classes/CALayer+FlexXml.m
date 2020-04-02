@@ -82,6 +82,9 @@
         if([key isEqualToString:@"fontSize"]){
             layer.fontSize = value.doubleValue;
         }
+        if([key isEqualToString:@"font"]){
+            layer.font = (__bridge CFTypeRef _Nullable)([UIFont fontWithName:value size:10]);
+        }
         if([key isEqualToString:@"foregroundColor"]){
             uint32_t hex = 0;
             [[NSScanner scannerWithString:value] scanHexInt:&hex];
@@ -110,7 +113,7 @@
         
     }else if (self.string){
         NSAttributedString* str = [[NSAttributedString alloc] initWithString:self.string attributes:@{
-            NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:self.fontSize]
+            NSFontAttributeName: [(UIFont *)self.font fontWithSize:self.fontSize]
         }];
         CTFramesetterRef setting = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)str);
         CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(setting, CFRangeMake(0, str.length), nil, constaintSize, nil);

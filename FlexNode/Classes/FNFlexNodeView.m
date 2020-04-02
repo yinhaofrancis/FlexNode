@@ -22,7 +22,5 @@
     [self.node layout];
     self.contentSize = CGSizeMake(self.node.width, self.node.height);
 }
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection{
-    
-}
+
 @end

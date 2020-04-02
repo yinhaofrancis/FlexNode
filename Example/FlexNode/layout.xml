@@ -290,9 +290,9 @@
             </self.SubNode>
              
         </Node>
-        <Node name="sub" margin="{1,1,1,1}">
+        <Node name="sub"  height = "30" margin="{1,1,1,1}">
             <self.Content>
-                <Text backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" fontSize="10" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center"/>
+                <Text backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="10" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
             </self.Content>
         </Node>
     </self.SubNode>
