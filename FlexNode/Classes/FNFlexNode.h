@@ -64,6 +64,7 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 @property (nonatomic,assign) CGFloat grow;
 @property (nonatomic,assign) CGFloat shrink;
 @property (nonatomic,assign) UIEdgeInsets margin;
+@property (nonatomic,assign) BOOL autoSize;
 
 - (void) setAxisLocation:(CGFloat)location direction:(FNFlexLayoutDirectionType)direction;
 

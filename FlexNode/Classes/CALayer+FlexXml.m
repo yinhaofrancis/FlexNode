@@ -6,7 +6,7 @@
 //
 
 #import "CALayer+FlexXml.h"
-
+#import <CoreText/CoreText.h>
 @implementation CALayer (FlexXml)
 + (instancetype)nodeWithXMLAttribute:(NSDictionary<NSString *,NSString *> *)attribute{
     CALayer* l = [[self alloc] init];
@@ -57,6 +57,9 @@
 + (nonnull SEL)propertyNode:(nonnull NSString *)name {
     return nil;
 }
+
+
+
 - (CGSize)FlexNodeContentSize:(CGSize)constaintSize{
     if(self.contents){
         CGImageRef img = (__bridge CGImageRef)(self.contents);
@@ -97,19 +100,33 @@
     return layer;
 }
 - (CGSize)FlexNodeContentSize:(CGSize)constaintSize{
+    
     if(self.string && [self.string isKindOfClass:NSAttributedString.class]){
         NSAttributedString* str = self.string;
-        CGRect rect = [str boundingRectWithSize:constaintSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        CTFramesetterRef setting = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)str);
+        CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(setting, CFRangeMake(0, str.length), nil, constaintSize, nil);
+        CFRelease(setting);
+        return size;
         
-        return rect.size;
     }else if (self.string){
         NSAttributedString* str = [[NSAttributedString alloc] initWithString:self.string attributes:@{
-            NSFontAttributeName:[UIFont systemFontOfSize:self.fontSize]
+            NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:self.fontSize]
         }];
-        CGRect rect = [str boundingRectWithSize:constaintSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-        return rect.size;
+        CTFramesetterRef setting = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)str);
+        CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(setting, CFRangeMake(0, str.length), nil, constaintSize, nil);
+        CFRelease(setting);
+        return size;
     }
-    return constaintSize;
+    return CGSizeMake(0, 0);
+}
+//+ (SEL)propertyNode:(NSString *)name{
+//    if([name isEqualToString:@"self.AttributeString"]){
+//        return @selector(setAttributeString:);
+//    }
+//    return [super propertyNode:name];
+//}
+- (void)setAttributeString:(NSAttributedString *)str{
+    self.string = str;
 }
 
 @end
@@ -142,21 +159,5 @@
 @end
 
 
-@implementation NSAttributedString(FlexXml)
-
-
-
-+ (nonnull instancetype)nodeWithXMLAttribute:(nonnull NSDictionary<NSString *,NSString *> *)attribute {
-    return nil;
-}
-
-+ (nonnull SEL)propertyNode:(nonnull NSString *)name { 
-    return nil;
-}
-
-
-
-
-@end
 
 

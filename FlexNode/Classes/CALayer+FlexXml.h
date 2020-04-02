@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)imageWithXmlValue:(NSString *)imageValue;
 @end
 
-@interface NSAttributedString (FlexXml)<FNXMLElement>
 
-@end
 
 NS_ASSUME_NONNULL_END

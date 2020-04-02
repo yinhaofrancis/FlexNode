@@ -26,22 +26,34 @@
 - (void)contentSize{
     CGSize constraint = CGSizeMake(self.width == 0 ? CGFLOAT_MAX : self.width - self.margin.left - self.margin.right, self.height == 0 ? CGFLOAT_MAX : self.height - self.margin.top - self.margin.bottom);
     if(self.view != nil){
-        CGSize size = [self.view systemLayoutSizeFittingSize:constraint];
-        if(size.width != 0 && self.width == 0){
+         CGSize size = [self.view systemLayoutSizeFittingSize:constraint];
+        if(!self.autoSize){
+            if(size.width != 0 && self.width == 0){
+                self.width = size.width;
+            }
+            if(size.height != 0 && self.height == 0){
+                self.height = size.height;
+            }
+        }else{
             self.width = size.width;
-        }
-        if(size.height != 0 && self.height == 0){
             self.height = size.height;
         }
+        
     }
     if(self.layer != nil || self.view == nil){
         CGSize size = [self.layer FlexNodeContentSize:constraint];
-        if(size.width != 0 && self.width == 0){
+        if(!self.autoSize){
+            if(size.width != 0 && self.width == 0){
+                self.width = size.width;
+            }
+            if(size.height != 0 && self.height == 0){
+                self.height = size.height;
+            }
+        }else{
             self.width = size.width;
-        }
-        if(size.height != 0 && self.height == 0){
             self.height = size.height;
         }
+        
         if([self.layer isKindOfClass:CATextLayer.class]){
             NSLog(@"autoSize %@",NSStringFromCGSize(size));
         }
@@ -542,6 +554,8 @@
             flexnode.wrap = [att boolValue];
         }else if([node isEqualToString:@"margin"]){
             flexnode.margin = UIEdgeInsetsFromString(att);
+        }else if([node isEqualToString:@"autoSize"]){
+            flexnode.autoSize = att.boolValue;
         }else{
             [flexnode setValue:att forKey:node];
         }
@@ -557,6 +571,11 @@
     }
     return nil;
 }
+
++ (BOOL)setPropertyAtEnd:(nonnull NSString *)name { 
+    return false;
+}
+
 //MARK:查找Node
 - (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name{
     NSMutableArray<FNFlexNode *> *nodes = [NSMutableArray new];

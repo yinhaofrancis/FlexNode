@@ -25,10 +25,14 @@
     [self.parser parseNode:[NSBundle.mainBundle URLForResource:@"layout" withExtension:@"xml"] handle:^(NSError * _Nonnull e, FNFlexNode * _Nonnull node) {
         wself.node = node;
         [wself.view.layer addSublayer:node.layer];
-        node.x = 200;
+        node.x = 20;
         node.y = 123;
         [wself.node layout];
     }];
+    
+
+    
+    
 }
 
 - (IBAction)change:(UISlider *)sender {
