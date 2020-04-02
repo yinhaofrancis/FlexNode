@@ -24,19 +24,6 @@
             <self.Content>
                 <Layer backgroundColor="0x34Fe00ff" contents="name:p" contentsGravity="resizeAspect"/>
             </self.Content>
-            <self.SubNode>
-                <Node name="seed" width="5" height="5">
-                    <self.Content>
-                        <Layer backgroundColor="0x3465ffff" />
-                    </self.Content>
-                </Node>
-                <Node name="seed" width="5" height="5">
-                    <self.Content>
-                        <Layer backgroundColor="0x3465ffff" />
-                    </self.Content>
-                </Node>
-            </self.SubNode>
-            
         </Node>
         <Node name="sub" width="63" height="44" margin="{1,1,1,1}">
             <self.Content>
@@ -290,9 +277,9 @@
             </self.SubNode>
              
         </Node>
-        <Node name="sub"  height = "30" margin="{1,1,1,1}">
+        <Node name="sub" margin="{1,1,1,1}">
             <self.Content>
-                <Text backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="10" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
+                <Text backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="14" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
             </self.Content>
         </Node>
     </self.SubNode>
