@@ -35,10 +35,6 @@
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     CATextLayer *l =  [[self.node findlayerByName:@"cc"] firstObject];
-//    NSAttributedString* a = [[NSAttributedString alloc] initWithString:[textField.text stringByAppendingString:string] attributes:@{
-//        NSForegroundColorAttributeName:UIColor.whiteColor,
-//        NSFontAttributeName:[UIFont systemFontOfSize:28]
-//    }];
     l.string = textField.text;
     [self.node layout];
     return true;
