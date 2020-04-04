@@ -8,8 +8,9 @@
 #import "FNXMLParser.h"
 #import "FNFlexNode.h"
 #import "CALayer+FlexXml.h"
+#import "FNCoreTextLayer.h"
 @implementation FNXMLParser{
-    FNFlexNode* root;
+    FNFlexNode* _Nullable root;
     NSMutableArray *currentElement;
     void (^callback)(NSError * _Nullable, FNFlexNode * _Nullable);
     NSInteger subNode;
@@ -35,6 +36,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
     callback(nil,root);
     [currentElement removeAllObjects];
+    root = nil;
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     if([elementName containsString:@"."]){ //属性节点切换
@@ -79,6 +81,8 @@
 }
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
     NSLog(@"%@",parseError);
+    root = nil;
+    [currentElement removeAllObjects];
 }
 
 - (Class) elementNameMapClass:(NSString *)elementName{
@@ -99,6 +103,9 @@
     }
     if([elementName isEqualToString:@"ParagraphStyle"]){
         return [NSMutableParagraphStyle class];
+    }
+    if([elementName isEqualToString:@"CoreText"]){
+        return [FNCoreTextLayer class];
     }
     return NSClassFromString(elementName);
 }

@@ -102,6 +102,8 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 - (void)setContentLayer:(CALayer *)layer;
 
 - (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name;
+
+- (NSArray<CALayer *> *)findlayerByName:(NSString *)name;
 @end
 
 @interface FNFlexLine : NSObject

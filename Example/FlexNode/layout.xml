@@ -279,7 +279,7 @@
         </Node>
         <Node name="sub" margin="{1,1,1,1}">
             <self.Content>
-                <Text backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="14" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
+                <Text name = "cc" backgroundColor="0xFFFFFFFF" string="hello flex world dfsdf sfsdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="14" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
             </self.Content>
         </Node>
     </self.SubNode>

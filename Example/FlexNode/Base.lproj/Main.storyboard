@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="64" minValue="20" maxValue="128" translatesAutoresizingMaskIntoConstraints="NO" id="wQJ-aV-SOl">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="64" minValue="20" maxValue="128" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQJ-aV-SOl">
                                 <rect key="frame" x="18" y="617" width="339" height="31"/>
                                 <connections>
                                     <action selector="change:" destination="whP-gf-Uak" eventType="valueChanged" id="CKS-jG-Ss1"/>
@@ -32,12 +32,23 @@
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>
                     <navigationItem key="navigationItem" id="J3q-Rq-3x7">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="LD2-sH-yJc"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="cRZ-H2-b2n">
+                            <rect key="frame" x="71" y="5" width="233" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="4WI-qv-0tJ">
                             <connections>
                                 <segue destination="Bec-ij-ogr" kind="show" id="xZJ-Qc-Nhs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tf" destination="cRZ-H2-b2n" id="ihT-ym-Bxc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

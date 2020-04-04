@@ -53,10 +53,6 @@
             self.width = size.width;
             self.height = size.height;
         }
-        
-        if([self.layer isKindOfClass:CATextLayer.class]){
-            NSLog(@"autoSize %@",NSStringFromCGSize(size));
-        }
     }
     for (FNFlexNode *node in self.subNode) {
         [node contentSize];
@@ -151,10 +147,6 @@
     for (FNFlexNode *node in self.subNode) {
         [node backup];
     }
-    if([self.layer isKindOfClass:CATextLayer.class]){
-        NSLog(@"backup %@",NSStringFromCGRect(self.frame));
-    }
-    
     backupLocation = CGRectMake(self.x, self.y, self.width, self.height);
 }
 - (void)recover{
@@ -167,9 +159,6 @@
     self.width = backupLocation.size.width;
     self.height = backupLocation.size.height;
     [lines removeAllObjects];
-    if([self.layer isKindOfClass:CATextLayer.class]){
-        NSLog(@"recover %@",NSStringFromCGRect(self.frame));
-    }
 }
 //MARK:确定尺寸
 - (void)layoutSize {
@@ -412,9 +401,6 @@
 }
 - (void)layoutComplete{
     CGRect rect = self.frame;
-    if([self.layer isKindOfClass:CATextLayer.class]){
-        NSLog(@"result %@",NSStringFromCGRect(rect));
-    }
     self.view.frame = rect;
     self.layer.frame = rect;
     for (FNFlexNode *node in self.subNode) {
@@ -579,11 +565,27 @@
 //MARK:查找Node
 - (NSArray<FNFlexNode *> *)findNodeByName:(NSString *)name{
     NSMutableArray<FNFlexNode *> *nodes = [NSMutableArray new];
+    if([self.name isEqualToString:name]){
+        [nodes addObject:self];
+    }
     for (FNFlexNode *node in self.subNode) {
         if([node.name isEqualToString:name]){
             [nodes addObject:node];
         }
         [nodes addObjectsFromArray:[node findNodeByName:name]];
+    }
+    return nodes;
+}
+- (NSArray<CALayer *> *)findlayerByName:(NSString *)name{
+    NSMutableArray<CALayer *> *nodes = [NSMutableArray new];
+    if([name isEqualToString:self.layer.name]){
+        [nodes addObject:self.layer];
+    }
+    for (FNFlexNode *node in self.subNode) {
+        if([node.layer.name isEqualToString:name]){
+            [nodes addObject:node.layer];
+        }
+        [nodes addObjectsFromArray:[node findlayerByName:name]];
     }
     return nodes;
 }

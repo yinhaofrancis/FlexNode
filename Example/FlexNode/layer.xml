@@ -1,0 +1,11 @@
+<Node width="800" margin="{1,1,1,1}">
+    <self.Content>
+        <CoreText name="cc" backgroundColor="0x667788ff">
+            <self.AttributeString>
+                <AttributeString string="hello world dfasdhf aks dfhasjf afh dfj afdhsadjfa fd afh hsdfhas dfa sdfh  sdhf ksjdhf sdhf ks fsdh jdhf jhdfad dfh adf adf adfk asdf adkf asdfh asffd kdfh kf askdf hakfdh sfhafhalsf hello"
+                    foregroundColor="0x780098ff" font=":32">
+                </AttributeString>
+            </self.AttributeString>
+        </CoreText>
+    </self.Content>
+</Node>

@@ -49,6 +49,9 @@
             UIImage* img = [UIImage imageWithXmlValue:value];
             l.contents = (__bridge id _Nullable)(img.CGImage);
         }
+        if([key isEqualToString:@"name"]){
+            l.name = value;
+        }
     }
     l.contentsScale = UIScreen.mainScreen.scale;
     return l;
@@ -122,12 +125,6 @@
     }
     return CGSizeMake(0, 0);
 }
-//+ (SEL)propertyNode:(NSString *)name{
-//    if([name isEqualToString:@"self.AttributeString"]){
-//        return @selector(setAttributeString:);
-//    }
-//    return [super propertyNode:name];
-//}
 - (void)setAttributeString:(NSAttributedString *)str{
     self.string = str;
 }
