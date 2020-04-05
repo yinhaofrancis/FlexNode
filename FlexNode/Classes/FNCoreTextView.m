@@ -10,23 +10,27 @@
 @implementation FNCoreTextView{
     FNCoreTextLayer* content;
     UILayoutConstraintAxis axis;
+    CGRect last;
 }
 @dynamic attributeString;
 
 - (void)setAttributeString:(NSAttributedString *)attributeString{
     content.attributeString = attributeString;
-    CGSize size;
-    if(axis == UILayoutConstraintAxisHorizontal){
-        size = [content FlexNodeContentSize:CGSizeMake(CGFLOAT_MAX, UIScreen.mainScreen.bounds.size.height)];
-    }else{
-        size = [content FlexNodeContentSize:CGSizeMake(UIScreen.mainScreen.bounds.size.width, CGFLOAT_MAX)];
-    }
-    self.contentSize = size;
-    content.frame = CGRectMake(0, 0, size.width, size.height);
+    
 }
 
 - (void)layoutSubviews{
-    
+    if(!CGRectEqualToRect(self.frame, last)){
+        last = self.frame;
+        CGSize size;
+        if(axis == UILayoutConstraintAxisHorizontal){
+            size = [content FlexNodeContentSize:CGSizeMake(CGFLOAT_MAX, self.constraint == 0 ? self.frame.size.height : self.constraint)];
+        }else{
+            size = [content FlexNodeContentSize:CGSizeMake(self.constraint == 0 ? self.frame.size.width : self.constraint, CGFLOAT_MAX)];
+        }
+        self.contentSize = size;
+        content.frame = CGRectMake(0, 0, size.width, size.height);
+    }
 }
 - (NSAttributedString *)attributeString{
     return content.attributeString;

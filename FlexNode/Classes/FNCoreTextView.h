@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FNCoreTextView : UIScrollView
 @property (nonatomic,copy)NSAttributedString *attributeString;
+@property (nonatomic,assign) IBInspectable CGFloat constraint;
 - (instancetype)initWithAxis:(UILayoutConstraintAxis)axis;
 @end
 

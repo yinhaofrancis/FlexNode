@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     NSMutableAttributedString * a = [NSMutableAttributedString new];
-    for (int i = 15; i < 96; i++) {
+    for (int i = 8; i < 96; i++) {
         NSAttributedString* atts = [[NSAttributedString alloc] initWithString:@"天道" attributes:@{
             NSFontAttributeName:[UIFont systemFontOfSize:i],
             NSForegroundColorAttributeName:UIColor.blackColor

@@ -59,6 +59,9 @@
     [d draw:ctx rect:frame];
 }
 - (void)setAttributeString:(NSAttributedString *)attributeString{
+    if(frameSet){
+        CFRelease(frameSet);
+    }
     frameSet = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributeString);
     _attributeString = attributeString;
 }
@@ -105,6 +108,12 @@
 }
 - (void)dealloc
 {
-    CFRelease(frameref);
+    if(frameSet){
+        CFRelease(frameSet);
+    }
+    if(frameref){
+        CFRelease(frameref);
+    }
+    
 }
 @end
