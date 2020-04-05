@@ -8,19 +8,55 @@
 #import "FNCoreTextLayer.h"
 #import <CoreText/CoreText.h>
 #import "CALayer+FlexXml.h"
+#import "FNRunDelegate.h"
+
 @implementation FNCoreTextLayer {
     CTFramesetterRef frameSet;
+    CTFrameRef frameref;
 }
 -(void)drawInContext:(CGContextRef)ctx{
     CGSize size = [self FlexNodeContentSize:self.bounds.size];
     CGContextScaleCTM(ctx, 1, -1);
     CGContextTranslateCTM(ctx, 0, -size.height);
-    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, size.width, size.height), nil);
-    CTFrameRef frame = CTFramesetterCreateFrame(frameSet, CFRangeMake(0, self.attributeString.length),path , nil);
-    CTFrameDraw(frame, ctx);
-    CGPathRelease(path);
-    CFRelease(frame);
-    
+    CTFrameDraw(frameref, ctx);
+    NSArray * lines = (NSArray *)CTFrameGetLines(frameref);
+    CGPoint* points = malloc(sizeof(CGPoint) * lines.count);
+    CTFrameGetLineOrigins(frameref, CFRangeMake(0, lines.count), points);
+    for (int i = 0; i < lines.count; i ++) {
+        CTLineRef lineRef = (__bridge CTLineRef)lines[i];
+        NSArray *runs = (NSArray *)CTLineGetGlyphRuns(lineRef);
+        for (id run in runs) {
+            CTRunRef runref = (__bridge CTRunRef)(run);
+            CGFloat xOffset = CTLineGetOffsetForStringIndex(lineRef, CTRunGetStringRange(runref).location, NULL);
+            CGFloat ascent;
+            CGFloat descent;
+            CGFloat leading;
+            CGFloat width = CTRunGetTypographicBounds(runref, CFRangeMake(0, 0), &ascent, &descent, &leading);
+            
+            CGRect rect = CGRectMake(points[i].x + xOffset, points[i].y - descent, width, ascent + descent);
+            NSDictionary * dic = (NSDictionary *)CTRunGetAttributes(runref);
+            
+            if(dic[(NSString *)kCTRunDelegateAttributeName]){
+                [self drawRunDelegate:frameref
+                                 line:lineRef
+                                  run:runref
+                            attribute:dic
+                             runframe:rect
+                              context:ctx];
+            }
+        }
+    }
+    free(points);
+}
+
+- (void)drawRunDelegate:(CTFrameRef)frameref
+                   line:(CTLineRef)lineref
+                    run:(CTRunRef)runref
+              attribute:(NSDictionary *)att
+               runframe:(CGRect)frame
+                context:(CGContextRef)ctx{
+    FNRunDelegate *d = att[FNRunDelegateKey];
+    [d draw:ctx rect:frame];
 }
 - (void)setAttributeString:(NSAttributedString *)attributeString{
     frameSet = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributeString);
@@ -59,15 +95,16 @@
 }
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
+    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, frame.size.width, frame.size.height), nil);
+    if (frameref) {
+        CFRelease(frameref);
+    }
+    frameref = CTFramesetterCreateFrame(frameSet, CFRangeMake(0, self.attributeString.length),path , nil);
+    CGPathRelease(path);
     [self setNeedsDisplay];
 }
-- (instancetype)init
+- (void)dealloc
 {
-    self = [super init];
-    if (self) {
-//        self.tileSize = CGSizeMake(320 , 320);
-    }
-    return self;
+    CFRelease(frameref);
 }
-
 @end

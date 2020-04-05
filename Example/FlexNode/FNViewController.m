@@ -8,48 +8,38 @@
 
 #import "FNViewController.h"
 #import <FNFlexNode.h>
-#import "FNCoreTextLayer.h"
+#import "FNCoreTextView.h"
 #import "FNXMLParser.h"
+#import "FNRunDelegate.h"
 @interface FNViewController ()<UITextFieldDelegate>
-@property (nonnull,nonatomic) FNFlexNode *node;
-@property (weak, nonatomic) IBOutlet UITextField *tf;
-@property (nonatomic,strong) FNXMLParser* parser;
+@property (weak, nonatomic) IBOutlet FNCoreTextView *CoreTextView;
+
 @end
 
 @implementation FNViewController
 
 - (void)viewDidLoad
 {
-    self.tf.delegate = self;
     [super viewDidLoad];
+    NSMutableAttributedString * a = [NSMutableAttributedString new];
+    for (int i = 15; i < 96; i++) {
+        NSAttributedString* atts = [[NSAttributedString alloc] initWithString:@"天道" attributes:@{
+            NSFontAttributeName:[UIFont systemFontOfSize:i],
+            NSForegroundColorAttributeName:UIColor.blackColor
+        }];
+        [a appendAttributedString:atts];
+        FNRunDelegate *rund = [[FNRunDelegate alloc] initWithFont:[UIFont systemFontOfSize:i] withImage:[UIImage imageNamed:@"p"]];
     
-    self.parser = [[FNXMLParser alloc] init];
-    __weak FNViewController* wself = self;
-    [self.parser parseNode:[NSBundle.mainBundle URLForResource:@"layout" withExtension:@"xml"] handle:^(NSError * _Nonnull e, id _Nonnull node) {
-        wself.node = node;
-        [wself.view.layer addSublayer:wself.node.layer];
-        wself.node.x = 20;
-        wself.node.y = 123;
-        [wself.node layout];
-    }];
+        NSAttributedString* runda = [[NSAttributedString alloc] initWithRunDelegate:rund];
+        [a appendAttributedString:runda];
+        
+        [a appendAttributedString:[NSAttributedString.alloc initWithString:@"\n"]];
+    }
+    self.CoreTextView.attributeString = a;
+    
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    CATextLayer *l =  [[self.node findlayerByName:@"cc"] firstObject];
-    l.string = textField.text;
-    [self.node layout];
-    return true;
-}
-
 - (IBAction)change:(UISlider *)sender {
-    [[self.node findNodeByName:@"sub"] enumerateObjectsUsingBlock:^(FNFlexNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.width = sender.value;
-        obj.wrap = true;
-    }];
-    [[self.node findNodeByName:@"seed"] enumerateObjectsUsingBlock:^(FNFlexNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.width = sender.value / 3;
-        obj.height = sender.value / 3;
-    }];
-    [self.node layout];
+
 }
 
 @end

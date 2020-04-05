@@ -16,38 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="64" minValue="20" maxValue="128" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQJ-aV-SOl">
-                                <rect key="frame" x="18" y="617" width="339" height="31"/>
-                                <connections>
-                                    <action selector="change:" destination="whP-gf-Uak" eventType="valueChanged" id="CKS-jG-Ss1"/>
-                                </connections>
-                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Czr-Px-jYV" customClass="FNCoreTextView">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wQJ-aV-SOl" firstAttribute="leading" secondItem="5xr-fR-SUz" secondAttribute="leading" constant="20" id="01W-gB-8WJ"/>
-                            <constraint firstItem="5xr-fR-SUz" firstAttribute="trailing" secondItem="wQJ-aV-SOl" secondAttribute="trailing" constant="20" id="aqc-nS-7JQ"/>
-                            <constraint firstItem="5xr-fR-SUz" firstAttribute="bottom" secondItem="wQJ-aV-SOl" secondAttribute="bottom" constant="20" id="mqN-4q-kg3"/>
+                            <constraint firstItem="Czr-Px-jYV" firstAttribute="trailing" secondItem="5xr-fR-SUz" secondAttribute="trailing" id="BbP-Iz-bZ8"/>
+                            <constraint firstItem="5xr-fR-SUz" firstAttribute="bottom" secondItem="Czr-Px-jYV" secondAttribute="bottom" id="F1L-I6-LYX"/>
+                            <constraint firstItem="Czr-Px-jYV" firstAttribute="top" secondItem="5xr-fR-SUz" secondAttribute="top" id="YzF-VW-AHg"/>
+                            <constraint firstItem="Czr-Px-jYV" firstAttribute="leading" secondItem="5xr-fR-SUz" secondAttribute="leading" id="vhv-V3-evM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>
                     <navigationItem key="navigationItem" id="J3q-Rq-3x7">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="LD2-sH-yJc"/>
-                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="cRZ-H2-b2n">
-                            <rect key="frame" x="71" y="5" width="233" height="34"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="4WI-qv-0tJ">
-                            <connections>
-                                <segue destination="Bec-ij-ogr" kind="show" id="xZJ-Qc-Nhs"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tf" destination="cRZ-H2-b2n" id="ihT-ym-Bxc"/>
+                        <outlet property="CoreTextView" destination="Czr-Px-jYV" id="ODP-4O-mvs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -63,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zvm-WO-tEb" customClass="FNFlexNodeView">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
