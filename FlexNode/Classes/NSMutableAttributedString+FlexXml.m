@@ -127,7 +127,7 @@
             string = value;
         }
     }
-    return [[NSMutableAttributedString alloc] initWithString:string attributes:att];
+    return [[NSMutableAttributedString alloc] initWithString:string ? string : @"" attributes:att];
     
 }
 
@@ -139,11 +139,14 @@
         return @selector(setParamStyle:);
     }
     if([name isEqualToString:@"self.AttributeString"]){
-        return @selector(appendAttributedString:);
+        return @selector(appendAttributedStringContainBR:);
     }
     return nil;
 }
-
+- (void)appendAttributedStringContainBR:(NSAttributedString *)attrString{
+//    [self appendAttributedString:[NSAttributedString.alloc initWithString:@"\n"]];
+    [self appendAttributedString:attrString];
+}
 
 
 - (void)setParamStyle:(NSParagraphStyle *)style{

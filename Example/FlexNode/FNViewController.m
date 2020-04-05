@@ -21,21 +21,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSMutableAttributedString * a = [NSMutableAttributedString new];
-    for (int i = 8; i < 96; i++) {
-        NSAttributedString* atts = [[NSAttributedString alloc] initWithString:@"天道" attributes:@{
-            NSFontAttributeName:[UIFont systemFontOfSize:i],
-            NSForegroundColorAttributeName:UIColor.blackColor
-        }];
-        [a appendAttributedString:atts];
-        FNRunDelegate *rund = [[FNRunDelegate alloc] initWithFont:[UIFont systemFontOfSize:i] withImage:[UIImage imageNamed:@"p"]];
+    [[[FNXMLParser alloc] init] parseNode:[NSBundle.mainBundle URLForResource:@"string" withExtension:@"xml"] handle:^(NSError * _Nonnull e, NSAttributedString  * _Nonnull element) {
+        self.CoreTextView.attributeString = element;
+    }];
     
-        NSAttributedString* runda = [[NSAttributedString alloc] initWithRunDelegate:rund];
-        [a appendAttributedString:runda];
-        
-        [a appendAttributedString:[NSAttributedString.alloc initWithString:@"\n"]];
-    }
-    self.CoreTextView.attributeString = a;
     
 }
 - (IBAction)change:(UISlider *)sender {
