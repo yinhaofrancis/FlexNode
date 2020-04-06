@@ -16,6 +16,7 @@ extern NSString * const FNRunDelegateKey;
 @property(nonatomic,assign) CGFloat descent;
 @property(nonatomic,assign) CGFloat width;
 @property(nonatomic,strong) UIImage *image;
+@property(nonatomic,assign) CGFloat cornerRadius;
 - (instancetype)initWithFont:(UIFont *)font;
 
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image;
@@ -24,9 +25,10 @@ extern NSString * const FNRunDelegateKey;
 
 @interface NSAttributedString (FNRunDelegate)
 
+- (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate
+                      paragraphStyle:(NSParagraphStyle * _Nullable)style;
+
 - (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate;
-
-
 
 @end
 

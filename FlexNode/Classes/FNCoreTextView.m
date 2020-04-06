@@ -24,11 +24,21 @@
         CGSize size;
         if(axis == UILayoutConstraintAxisHorizontal){
             size = [content FlexNodeContentSize:CGSizeMake(CGFLOAT_MAX, self.constraint == 0 ? self.frame.size.height : self.constraint)];
+            if(self.constraint){
+                size.height = self.constraint;
+                self.contentSize = size;
+                content.frame = CGRectMake(0, 0, size.width, size.height);
+            }
         }else{
             size = [content FlexNodeContentSize:CGSizeMake(self.constraint == 0 ? self.frame.size.width : self.constraint, CGFLOAT_MAX)];
+            if(self.constraint){
+                size.width = self.constraint;
+                self.contentSize = size;
+                content.frame = CGRectMake(0, 0, size.width, size.height);
+            }
         }
-        self.contentSize = size;
-        content.frame = CGRectMake(0, 0, size.width, size.height);
+        
+        
     }
 }
 - (NSAttributedString *)attributeString{

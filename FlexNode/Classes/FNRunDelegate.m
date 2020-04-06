@@ -44,13 +44,21 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     return self;
 }
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect{
+    CGContextSaveGState(ctx);
     if(self.image){
         CGFloat imageRatio = rect.size.width / self.image.size.width;
         CGFloat h = self.image.size.height * imageRatio;
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
+        if(self.cornerRadius){
+            CGPathRef path = CGPathCreateWithRoundedRect(drawRect, self.cornerRadius, self.cornerRadius, nil);
+            CGContextAddPath(ctx, path);
+            CGContextClip(ctx);
+            CGPathRelease(path);
+        }
         CGContextDrawImage(ctx, drawRect, self.image.CGImage);
     }
+    CGContextRestoreGState(ctx);
 }
 @end
 
@@ -66,6 +74,33 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     }];
     if(self) {
         
+    }
+    return self;
+}
+
+- (instancetype)initWithRunDelegate:(FNRunDelegate *)runDelegate paragraphStyle:(NSParagraphStyle *)style{
+    CTRunDelegateCallbacks callback = [self createCallback];
+    CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
+    
+    if(style){
+        self = [self.class.alloc initWithString:@"A" attributes:@{
+            (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
+            FNRunDelegateKey:runDelegate,
+            NSForegroundColorAttributeName:[UIColor clearColor],
+            NSParagraphStyleAttributeName:style
+        }];
+        if(self) {
+            
+        }
+    }else{
+        self = [self.class.alloc initWithString:@"A" attributes:@{
+            (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
+            FNRunDelegateKey:runDelegate,
+            NSForegroundColorAttributeName:[UIColor clearColor]
+        }];
+        if(self) {
+            
+        }
     }
     return self;
 }
