@@ -57,7 +57,7 @@
     return l;
 }
 
-+ (nonnull SEL)propertyNode:(nonnull NSString *)name {
++ (SEL)propertyNode:(nonnull NSString *)name {
     return nil;
 }
 

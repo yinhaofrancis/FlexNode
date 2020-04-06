@@ -16,7 +16,6 @@
 
 - (void)setAttributeString:(NSAttributedString *)attributeString{
     content.attributeString = attributeString;
-    
 }
 
 - (void)layoutSubviews{

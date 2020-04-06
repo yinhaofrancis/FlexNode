@@ -1,8 +1,6 @@
 <AttributeString>
     <self.AttributeString>
-        <AttributeString string="this is title" font=":32">
-        </AttributeString>
-        <AttributeString string="content sdfh sdjf aksdfh kasdhf aksjdfh aksdf ksdfj askdfh skdfhasdfh asdf askdf asdfhaskdf asdf asdkf adsjf askjdf askdf sadf asdfj askdf jasdf" font=":16">
+        <AttributeString string="this is title" font="Helvetica-Bold:32">
         </AttributeString>
         <AttributeString string="content sdfh sdjf aksdfh kasdhf aksjdfh aksdf ksdfj askdfh skdfhasdfh asdf askdf asdfhaskdf asdf asdkf adsjf askjdf askdf sadf asdfj askdf jasdf" font=":16">
         </AttributeString>

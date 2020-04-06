@@ -107,6 +107,9 @@
     if([elementName isEqualToString:@"CoreText"]){
         return [FNCoreTextLayer class];
     }
+    if([elementName isEqualToString:@"Font"]){
+        return [UIFont class];
+    }
     return NSClassFromString(elementName);
 }
 @end

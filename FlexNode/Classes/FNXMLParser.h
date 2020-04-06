@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)nodeWithXMLAttribute:(NSDictionary<NSString *,NSString *> *)attribute;
 
-+ (SEL)propertyNode:(NSString *)name;
++ (nullable SEL)propertyNode:(NSString *)name;
 
 
 @end

@@ -131,7 +131,7 @@
     
 }
 
-+ (nonnull SEL)propertyNode:(nonnull NSString *)name {
++ (SEL)propertyNode:(nonnull NSString *)name {
     if([name isEqualToString:@"self.Shadow"]){
         return @selector(setShadow:);
     }
@@ -141,13 +141,18 @@
     if([name isEqualToString:@"self.AttributeString"]){
         return @selector(appendAttributedStringContainBR:);
     }
+    if ([name isEqualToString:@"self.Font"]) {
+        return @selector(setFont:);
+    }
     return nil;
 }
 - (void)appendAttributedStringContainBR:(NSAttributedString *)attrString{
-//    [self appendAttributedString:[NSAttributedString.alloc initWithString:@"\n"]];
     [self appendAttributedString:attrString];
 }
 
+- (void)setFont:(UIFont *)font{
+    [self addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, self.length)];
+}
 
 - (void)setParamStyle:(NSParagraphStyle *)style{
     [self addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, self.length)];
@@ -247,7 +252,7 @@
     return paramStyle;
 }
 
-+ (nonnull SEL)propertyNode:(nonnull NSString *)name {
++ (SEL)propertyNode:(nonnull NSString *)name {
     return nil;
 }
 
@@ -275,6 +280,41 @@
     return shadow;
 }
 + (SEL)propertyNode:(NSString *)name{
+    return nil;
+}
+
+@end
+
+
+@implementation UIFont (FlexXml)
+
+
+
++ (nonnull instancetype)nodeWithXMLAttribute:(nonnull NSDictionary<NSString *,NSString *> *)attribute {
+    NSString *fontName = @".SFUI";
+    CGFloat fontSize = 16;
+    NSString *weight = @"regular";
+    for (NSString *key in attribute) {
+        NSString *value = attribute[key];
+        if ([key isEqualToString:@"fontName"]){
+            fontName = value;
+        }
+        if ([key isEqualToString:@"fontSize"]){
+            fontSize = value.doubleValue;
+        }
+        if ([key isEqualToString:@"weight"]){
+            weight = value;
+        }
+    }
+    UIFontDescriptor* fontd = [UIFontDescriptor fontDescriptorWithFontAttributes:@{
+        UIFontDescriptorFamilyAttribute:fontName,
+        UIFontDescriptorFaceAttribute:weight
+    }];
+    
+    return [UIFont fontWithDescriptor:fontd size:fontSize];
+}
+
++ (SEL)propertyNode:(nonnull NSString *)name {
     return nil;
 }
 
