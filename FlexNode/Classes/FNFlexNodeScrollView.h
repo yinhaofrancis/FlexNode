@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FNFlexNodeScrollView : UIScrollView
 @property(nonatomic, strong) FNFlexNode *node;
+@property(nonatomic, assign) UILayoutConstraintAxis direction;
 @end
 
 NS_ASSUME_NONNULL_END

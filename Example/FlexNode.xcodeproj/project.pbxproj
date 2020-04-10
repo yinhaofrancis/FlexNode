@@ -20,6 +20,7 @@
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A905AA23243428390009197B /* FNScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A905AA22243428390009197B /* FNScrollViewController.m */; };
 		A905AA2D243471F20009197B /* layout.xml in Resources */ = {isa = PBXBuildFile; fileRef = A905AA2C243471F20009197B /* layout.xml */; };
+		A9683BEC244095FC0033620D /* a.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9683BEB244095FC0033620D /* a.xml */; };
 		A9BAFFD524381A74009397DE /* layer.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9BAFFD424381A74009397DE /* layer.xml */; };
 		A9F620C82439E40B0010838D /* string.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9F620C72439E40B0010838D /* string.xml */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		A905AA21243428390009197B /* FNScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FNScrollViewController.h; sourceTree = "<group>"; };
 		A905AA22243428390009197B /* FNScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FNScrollViewController.m; sourceTree = "<group>"; };
 		A905AA2C243471F20009197B /* layout.xml */ = {isa = PBXFileReference; explicitFileType = text.xml; path = layout.xml; sourceTree = "<group>"; };
+		A9683BEB244095FC0033620D /* a.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = a.xml; sourceTree = "<group>"; };
 		A9BAFFD424381A74009397DE /* layer.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = layer.xml; sourceTree = "<group>"; };
 		A9F620C72439E40B0010838D /* string.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = string.xml; sourceTree = "<group>"; };
 		B118412095A02507F7A73631 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 				A905AA2C243471F20009197B /* layout.xml */,
+				A9683BEB244095FC0033620D /* a.xml */,
 				A9BAFFD424381A74009397DE /* layer.xml */,
 				A9F620C72439E40B0010838D /* string.xml */,
 			);
@@ -222,6 +225,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				A9F620C82439E40B0010838D /* string.xml in Resources */,
+				A9683BEC244095FC0033620D /* a.xml in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				A9BAFFD524381A74009397DE /* layer.xml in Resources */,
 			);

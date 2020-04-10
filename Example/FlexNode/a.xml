@@ -1,0 +1,23 @@
+<Node justify="spaceBetween" lineJustify="flexCenter">
+    <self.Content>
+        <Layer backgroundColor = "ff00ffff">
+        </Layer>
+    </self.Content>
+    <self.SubNode>
+        <Node name="seed" width="5" height="5">
+            <self.Content>
+                <Layer backgroundColor="0x3465ffff" />
+            </self.Content>
+        </Node>
+        <Node name="seed" width="5" height="5" grow = "1">
+            <self.Content>
+                <Layer backgroundColor="0x00ff00ff" />
+            </self.Content>
+        </Node>
+        <Node name="seed" width="5" height="5">
+            <self.Content>
+                <Layer backgroundColor="0x3465ffff" />
+            </self.Content>
+        </Node>
+    </self.SubNode>
+</Node>

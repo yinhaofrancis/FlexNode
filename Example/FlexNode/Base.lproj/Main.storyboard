@@ -17,19 +17,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knc-qZ-CJZ" customClass="FNFlexNodeView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="400"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="sSQ-yZ-Hg5"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layout" value="layout"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layout" value="a"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="knc-qZ-CJZ" firstAttribute="top" secondItem="TpU-gO-2f1" secondAttribute="top" id="4oX-XC-v7q"/>
+                            <constraint firstItem="knc-qZ-CJZ" firstAttribute="top" secondItem="5xr-fR-SUz" secondAttribute="top" id="4oX-XC-v7q"/>
                             <constraint firstItem="knc-qZ-CJZ" firstAttribute="trailing" secondItem="5xr-fR-SUz" secondAttribute="trailing" id="7a8-MQ-AiI"/>
                             <constraint firstItem="knc-qZ-CJZ" firstAttribute="leading" secondItem="5xr-fR-SUz" secondAttribute="leading" id="98o-nD-baW"/>
-                            <constraint firstItem="5xr-fR-SUz" firstAttribute="bottom" secondItem="knc-qZ-CJZ" secondAttribute="bottom" id="eHi-zk-dhJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>
