@@ -23,20 +23,46 @@
     }
     return self;
 }
-- (void)parseNode:(NSURL *)fileURL handle:(nonnull void (^)(NSError * _Nullable, FNFlexNode * _Nullable))callback{
+- (void)parseNode:(NSURL *)fileURL handle:(void (^)(NSError * _Nullable, id _Nullable))callback{
     NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:fileURL];
     parser.delegate = self;
     self->callback = callback;
     [parser parse];
+}
+- (id)parse:(NSString *)code{
+    NSData *data = [code dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:data];
+    parser.delegate = self;
+    BOOL succes = [parser parse];
+    if(succes){
+        id re = root;
+        root = nil;
+        return re;
+    }
+    return nil;
+}
+- (id)parseUrl:(NSURL *)fileURL{
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:fileURL];
+    parser.delegate = self;
+    BOOL succes = [parser parse];
+    if(succes){
+        id re = root;
+        root = nil;
+        return re;
+    }
+    return nil;
 }
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
     
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
-    callback(nil,root);
+    if(callback){
+        callback(nil,root);
+        root = nil;
+    }
     [currentElement removeAllObjects];
-    root = nil;
+    
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     if([elementName containsString:@"."]){ //属性节点切换
@@ -70,7 +96,9 @@
     if([elementName containsString:@"."]){ //属性节点切
         FNPropertyElement* e = currentElement.lastObject;
         for (id obj in e.propertyObjects) {
-            [e.object performSelector:e.entry withObject:obj];
+            IMP imp = [e.object methodForSelector:e.entry];
+            void(*func)(id,void *,id) = (void*)imp;
+            func(e.object,imp,obj);
         }
         [currentElement removeLastObject];
     }else{ //普通节点

@@ -17,7 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface FNXMLParser : NSObject<NSXMLParserDelegate>
-- (void)parseNode:(NSURL *)fileURL handle:(void (^)(NSError * e,id element))callback;
+- (void)parseNode:(NSURL *)fileURL handle:(void (^)(NSError * _Nullable e,id _Nullable element))callback;
+
+- (id)parse:(NSString *)code;
+
+- (id)parseUrl:(NSURL *)fileURL;
 @end
 
 @interface FNPropertyElement : NSObject

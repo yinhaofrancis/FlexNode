@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FNFlexNodeView.h"
+#import "FNFlexNodeScrollView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FNScrollViewController : UIViewController
-@property (weak, nonatomic) IBOutlet FNFlexNodeView *nodeView;
+@property (weak, nonatomic) IBOutlet FNFlexNodeScrollView *nodeView;
 
 @end
 

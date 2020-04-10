@@ -21,9 +21,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    
     self.CoreTextView.constraint = UIScreen.mainScreen.bounds.size.width;
     NSMutableAttributedString* att = [[NSMutableAttributedString alloc] init];
-    FNRunDelegate* run = [[FNRunDelegate alloc] initWithFont:[UIFont systemFontOfSize:128]          withImage:[UIImage imageNamed:@"avatar"]];
+    FNRunDelegate* run = [[FNRunDelegate alloc] initWithFont:[UIFont systemFontOfSize:128] withImage:[UIImage imageNamed:@"avatar"]];
     run.cornerRadius = 64;
     NSMutableParagraphStyle * param = [NSMutableParagraphStyle new];
     param.alignment = NSTextAlignmentCenter;

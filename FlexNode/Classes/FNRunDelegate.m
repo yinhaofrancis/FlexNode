@@ -50,8 +50,13 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         CGFloat h = self.image.size.height * imageRatio;
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
-        if(self.cornerRadius){
-            CGPathRef path = CGPathCreateWithRoundedRect(drawRect, self.cornerRadius, self.cornerRadius, nil);
+        if(self.cornerRadius > 0){
+            CGFloat corner = self.cornerRadius;
+            CGFloat max = MIN(drawRect.size.width, drawRect.size.height);
+            if(self.cornerRadius > max / 2 ){
+                corner = max / 2;
+            }
+            CGPathRef path = CGPathCreateWithRoundedRect(drawRect, corner, corner, nil);
             CGContextAddPath(ctx, path);
             CGContextClip(ctx);
             CGPathRelease(path);
