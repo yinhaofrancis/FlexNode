@@ -47,6 +47,26 @@
                ReferencedContainer = "container:FlexNode.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A9F620CC2441BA390010838D"
+               BuildableName = "FlexNode_ExampleTests.xctest"
+               BlueprintName = "FlexNode_ExampleTests"
+               ReferencedContainer = "container:FlexNode.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A9F620DA2441BA5F0010838D"
+               BuildableName = "FlexNode_ExampleUITests.xctest"
+               BlueprintName = "FlexNode_ExampleUITests"
+               ReferencedContainer = "container:FlexNode.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
