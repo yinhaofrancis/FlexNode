@@ -15,24 +15,7 @@
                     <view key="view" contentMode="scaleToFill" id="TpU-gO-2f1" customClass="FNCoreTextView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grx-dV-nG3" customClass="FNFlexNodeView">
-                                <rect key="frame" x="0.0" y="44" width="375" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="8N9-gv-WSQ"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layout" value="a"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="grx-dV-nG3" firstAttribute="trailing" secondItem="5xr-fR-SUz" secondAttribute="trailing" id="PMw-0i-t3R"/>
-                            <constraint firstItem="grx-dV-nG3" firstAttribute="leading" secondItem="5xr-fR-SUz" secondAttribute="leading" id="eE4-mD-1R5"/>
-                            <constraint firstItem="grx-dV-nG3" firstAttribute="top" secondItem="5xr-fR-SUz" secondAttribute="top" id="ev4-Yn-r8q"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>
                     <navigationItem key="navigationItem" id="J3q-Rq-3x7">

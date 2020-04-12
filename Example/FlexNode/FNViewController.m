@@ -3,7 +3,6 @@
 #import "FNViewController.h"
 #import <FNFlexNode.h>
 #import "FNCoreTextView.h"
-#import "FNXMLParser.h"
 #import "FNRunDelegate.h"
 @interface FNViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet FNCoreTextView *CoreTextView;

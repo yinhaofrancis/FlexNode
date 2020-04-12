@@ -6,7 +6,6 @@
 //
 
 #import "FNFlexNodeView.h"
-#import "FNXMLParser.h"
 @implementation FNFlexNodeView
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -19,11 +18,5 @@
     [self addSubview:node.view];
     [self.layer addSublayer:node.layer];
     
-}
-- (void)setLayout:(NSString *)layout{
-    _layout = layout;
-    NSURL *url = [NSBundle.mainBundle URLForResource:layout withExtension:@"xml"];
-    id root = [[[FNXMLParser alloc] init] parseUrl:url];
-    [self setNode:root];
 }
 @end

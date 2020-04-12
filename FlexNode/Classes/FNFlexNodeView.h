@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface FNFlexNodeView : UIView
 @property(nonatomic,strong) FNFlexNode *node;
-@property(nonatomic,copy) IBInspectable NSString *layout;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -6,7 +6,7 @@
 //
 
 #import "FNCoreTextView.h"
-
+#import "CALayer+Flex.h"
 @implementation FNCoreTextView{
     FNCoreTextLayer* content;
     UILayoutConstraintAxis axis;

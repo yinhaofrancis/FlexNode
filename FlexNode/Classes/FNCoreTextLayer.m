@@ -7,7 +7,6 @@
 
 #import "FNCoreTextLayer.h"
 #import <CoreText/CoreText.h>
-#import "CALayer+FlexXml.h"
 #import "FNRunDelegate.h"
 
 @implementation FNCoreTextLayer {
@@ -64,24 +63,6 @@
     }
     frameSet = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributeString);
     _attributeString = attributeString;
-}
-+ (instancetype)nodeWithXMLAttribute:(nonnull NSDictionary<NSString *,NSString *> *)attribute {
-    FNCoreTextLayer* layer = [super nodeWithXMLAttribute:attribute];
-    for (NSString * key in attribute) {
-        NSString *value = attribute[key];
-        if([key isEqualToString:@"constraintSize"]) {
-            layer.constraintSize = CGSizeFromString(value);
-        }
-    }
-    return layer;
-}
-
-+ (SEL)propertyNode:(nonnull NSString *)name {
-    if([name isEqualToString:@"self.AttributeString"]){
-        return @selector(setAttributeString:);
-    }else{
-        return [super propertyNode:name];
-    }
 }
 -(void)setConstraintSize:(CGSize)constraintSize{
     if (constraintSize.width == 0){

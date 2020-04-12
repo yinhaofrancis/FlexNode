@@ -1,6 +1,0 @@
-<Node margin="{20,1,1,1}">
-    <self.Content>
-        <Text name = "cc" backgroundColor="0xFFF55FFF" string="hello flex world dfsdf sff asdfsdf asdfh asdf ajsdf hsdf ahsdf sdhjf asdjhf asdhf asdhf asdhf asdf gasdf sdf asdf ashdf ghasdfg ahsdg fashdgf asdfg sdf sdf sfff sdf abc" wrapped="true" foregroundColor="0x12543ff" font ="Helvetica-Bold" fontSize="14" contentsGravity="resizeAspectFill" masksToBounds = "true" alignmentMode = "center" truncationMode="end"/>
-    </self.Content>
-</Node>
-

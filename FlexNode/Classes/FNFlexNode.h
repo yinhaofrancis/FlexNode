@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FNXMLParser.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, FNFlexLayoutJustifyType) {
@@ -44,7 +43,7 @@ typedef NS_ENUM(NSUInteger, FNFlexFrameRenderMode) {
 
 @end
 
-@interface FNFlexNode : NSObject<FNXMLElement>
+@interface FNFlexNode : NSObject
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,readonly) UIView *view;
 @property (nonatomic,readonly) CALayer *layer;

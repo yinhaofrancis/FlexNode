@@ -6,11 +6,10 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "FNXMLParser.h"
 #import "FNFlexNode.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FNCoreTextLayer : CALayer<FNXMLElement,FNFlexNodeContentProtocol>
+@interface FNCoreTextLayer : CALayer
 @property (nonatomic, strong) NSAttributedString *attributeString;
 @property (nonatomic, assign) CGSize constraintSize;
 @end
