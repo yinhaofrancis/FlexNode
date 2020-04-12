@@ -17,9 +17,18 @@ extern NSString * const FNRunDelegateKey;
 @property(nonatomic,assign) CGFloat width;
 @property(nonatomic,strong) UIImage *image;
 @property(nonatomic,assign) CGFloat cornerRadius;
+@property(nonatomic,assign) UIEdgeInsets margin;
 - (instancetype)initWithFont:(UIFont *)font;
 
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image;
+
+- (instancetype)initWithSize:(CGSize)size
+                      margin:(UIEdgeInsets)margin
+                   withImage:(UIImage *)image;
+
+- (instancetype)initWithSize:(CGSize)size
+                   withImage:(UIImage *)image;
+
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect;
 @end
 

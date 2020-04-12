@@ -36,6 +36,22 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     }
     return self;
 }
+- (instancetype)initWithSize:(CGSize)size withImage:(UIImage *)image{
+    return [self initWithSize:size margin:UIEdgeInsetsZero withImage:image];
+}
+- (instancetype)initWithSize:(CGSize)size
+                      margin:(UIEdgeInsets)margin
+                   withImage:(UIImage *)image{
+    self = [super init];
+    if(self) {
+        self.width = size.width + margin.left + margin.right;
+        self.ascent = size.height + margin.top + margin.bottom;
+        self.descent = 0;
+        self.margin = margin;
+        self.image = image;
+    }
+    return self;
+}
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image{
     self = [self initWithFont:font];
     if (self){
@@ -45,6 +61,11 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
 }
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect{
     CGContextSaveGState(ctx);
+    rect = CGRectMake(
+                      rect.origin.x + self.margin.left,
+                      rect.origin.y + self.margin.bottom,
+                      rect.size.width - self.margin.left - self.margin.right,
+                      rect.size.height - self.margin.top - self.margin.bottom);
     if(self.image){
         CGFloat imageRatio = rect.size.width / self.image.size.width;
         CGFloat h = self.image.size.height * imageRatio;
@@ -71,11 +92,15 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
 
 - (instancetype)initWithRunDelegate:(FNRunDelegate *)runDelegate{
     CTRunDelegateCallbacks callback = [self createCallback];
+    NSMutableParagraphStyle * p = [NSMutableParagraphStyle new];
+    p.lineSpacing = 0;
+    p.paragraphSpacing = 0;
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
     self = [self.class.alloc initWithString:@"A" attributes:@{
         (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
         FNRunDelegateKey:runDelegate,
-        NSForegroundColorAttributeName:[UIColor clearColor]
+        NSForegroundColorAttributeName:[UIColor clearColor],
+        NSParagraphStyleAttributeName:p
     }];
     if(self) {
         
@@ -88,7 +113,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
     
     if(style){
-        self = [self.class.alloc initWithString:@"A" attributes:@{
+        self = [self.class.alloc initWithString:@"-" attributes:@{
             (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
             FNRunDelegateKey:runDelegate,
             NSForegroundColorAttributeName:[UIColor clearColor],
@@ -98,7 +123,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
             
         }
     }else{
-        self = [self.class.alloc initWithString:@"A" attributes:@{
+        self = [self.class.alloc initWithString:@"-" attributes:@{
             (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
             FNRunDelegateKey:runDelegate,
             NSForegroundColorAttributeName:[UIColor clearColor]
