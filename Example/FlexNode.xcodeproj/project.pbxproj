@@ -23,6 +23,7 @@
 		A9683BEC244095FC0033620D /* a.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9683BEB244095FC0033620D /* a.xml */; };
 		A9BAFFD524381A74009397DE /* layer.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9BAFFD424381A74009397DE /* layer.xml */; };
 		A9F620C82439E40B0010838D /* string.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9F620C72439E40B0010838D /* string.xml */; };
+		A9F620E62441CFD40010838D /* libRNAliFace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F620E52441CFC30010838D /* libRNAliFace.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		A9683BEB244095FC0033620D /* a.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = a.xml; sourceTree = "<group>"; };
 		A9BAFFD424381A74009397DE /* layer.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = layer.xml; sourceTree = "<group>"; };
 		A9F620C72439E40B0010838D /* string.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = string.xml; sourceTree = "<group>"; };
+		A9F620E52441CFC30010838D /* libRNAliFace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRNAliFace.a; path = ../../../Downloads/libRNAliFace.a; sourceTree = "<group>"; };
 		B118412095A02507F7A73631 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
+				A9F620E62441CFD40010838D /* libRNAliFace.a in Frameworks */,
 				3053AC214171130AB796EFF7 /* Pods_FlexNode_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +99,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A9F620E52441CFC30010838D /* libRNAliFace.a */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
