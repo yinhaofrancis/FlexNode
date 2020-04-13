@@ -39,15 +39,18 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
 - (instancetype)initWithSize:(CGSize)size withImage:(UIImage *)image{
     return [self initWithSize:size margin:UIEdgeInsetsZero withImage:image];
 }
+- (instancetype)initwithImage:(UIImage *)image{
+    return [self initWithSize:image.size margin:UIEdgeInsetsZero withImage:image];
+}
 - (instancetype)initWithSize:(CGSize)size
                       margin:(UIEdgeInsets)margin
                    withImage:(UIImage *)image{
     self = [super init];
     if(self) {
         self.width = size.width + margin.left + margin.right;
-        self.ascent = size.height + margin.top + margin.bottom;
-        self.descent = 0;
-        self.margin = margin;
+        self.ascent = (size.height + margin.top + margin.bottom) / 2;
+        self.descent = self.ascent;
+        _margin = margin;
         self.image = image;
     }
     return self;
@@ -66,6 +69,8 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
                       rect.origin.y + self.margin.bottom,
                       rect.size.width - self.margin.left - self.margin.right,
                       rect.size.height - self.margin.top - self.margin.bottom);
+    
+    
     if(self.image){
         CGFloat imageRatio = rect.size.width / self.image.size.width;
         CGFloat h = self.image.size.height * imageRatio;
@@ -84,6 +89,10 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         }
         CGContextDrawImage(ctx, drawRect, self.image.CGImage);
     }
+    if(self.attributeString){
+        CGLayerRef layer = CGLayerCreateWithContext(ctx, rect.size, nil);
+        
+    }
     CGContextRestoreGState(ctx);
 }
 @end
@@ -96,7 +105,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     p.lineSpacing = 0;
     p.paragraphSpacing = 0;
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
-    self = [self.class.alloc initWithString:@"A" attributes:@{
+    self = [self.class.alloc initWithString:@"-" attributes:@{
         (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
         FNRunDelegateKey:runDelegate,
         NSForegroundColorAttributeName:[UIColor clearColor],

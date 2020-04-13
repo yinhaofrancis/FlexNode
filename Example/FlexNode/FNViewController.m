@@ -6,6 +6,7 @@
 #import "FNRunDelegate.h"
 @interface FNViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet FNCoreTextView *CoreTextView;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -20,7 +21,7 @@
     paramx.lineSpacing = 0;
     paramx.paragraphSpacing = 0;
     NSMutableAttributedString* att = [[NSMutableAttributedString alloc] init];
-    FNRunDelegate* run = [[FNRunDelegate alloc] initWithSize:CGSizeMake(128, 128) margin:UIEdgeInsetsMake(30, 0, 0, 0) withImage:[UIImage imageNamed:@"avatar"]];
+    FNRunDelegate* run = [[FNRunDelegate alloc] initWithSize:CGSizeMake(128, 128) margin:UIEdgeInsetsMake(0, 0, 0, 0) withImage:[UIImage imageNamed:@"avatar"]];
     run.cornerRadius = 64;
     NSMutableParagraphStyle * param = [NSMutableParagraphStyle new];
     param.alignment = NSTextAlignmentCenter;
@@ -32,7 +33,7 @@
     param2.alignment = NSTextAlignmentCenter;
     param2.paragraphSpacing = 0;
     param2.lineSpacing = 0;
-    NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@"\rFrancis " attributes:@{
+    NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@"\nFrancis " attributes:@{
      NSFontAttributeName:[UIFont systemFontOfSize:24 weight:UIFontWeightMedium],
      NSParagraphStyleAttributeName:param2
     }];
@@ -54,6 +55,22 @@
     [att appendAttributedString:desc];
     NSLog(@"%@",att);
     self.CoreTextView.attributeString = att;
+    
+    NSMutableParagraphStyle * sa = [[NSMutableParagraphStyle alloc] init];
+    sa.alignment = NSTextAlignmentNatural;
+    NSMutableAttributedString * ma = [[NSMutableAttributedString alloc] initWithString:@"abc" attributes:@{
+        NSParagraphStyleAttributeName:sa,
+        NSForegroundColorAttributeName:UIColor.blackColor,
+    }];
+    NSMutableParagraphStyle * sa2 = [[NSMutableParagraphStyle alloc] init];
+    sa.alignment = NSTextAlignmentNatural;
+    NSAttributedString* b = [[NSAttributedString alloc] initWithString:@"def" attributes:@{
+        NSForegroundColorAttributeName:UIColor.blueColor,
+        NSParagraphStyleAttributeName:sa2,
+//        NSWritingDirectionAttributeName:@[@(NSWritingDirectionLeftToRight | NSWritingDirectionEmbedding)]
+    }];
+    [ma appendAttributedString:b];
+    self.textLabel.attributedText = ma;
 }
 - (IBAction)change:(UISlider *)sender {
 

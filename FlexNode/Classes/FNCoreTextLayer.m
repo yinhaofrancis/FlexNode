@@ -34,7 +34,6 @@
             
             CGRect rect = CGRectMake(points[i].x + xOffset, points[i].y - descent, width, ascent + descent);
             NSDictionary * dic = (NSDictionary *)CTRunGetAttributes(runref);
-            CGContextStrokeRect(ctx, rect);
             CFRange range = CTRunGetStringRange(runref);
             NSLog(@"%@ {%ld,%ld}",NSStringFromCGRect(rect),range.location,range.length);
             if(dic[(NSString *)kCTRunDelegateAttributeName]){

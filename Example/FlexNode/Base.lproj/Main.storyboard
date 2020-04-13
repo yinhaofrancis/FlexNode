@@ -15,7 +15,20 @@
                     <view key="view" contentMode="scaleToFill" id="TpU-gO-2f1" customClass="FNCoreTextView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvz-oZ-A0J">
+                                <rect key="frame" x="0.0" y="646" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nvz-oZ-A0J" firstAttribute="leading" secondItem="5xr-fR-SUz" secondAttribute="leading" id="T6P-e8-vAo"/>
+                            <constraint firstItem="Nvz-oZ-A0J" firstAttribute="bottom" secondItem="5xr-fR-SUz" secondAttribute="bottom" id="brZ-VY-jQR"/>
+                            <constraint firstItem="5xr-fR-SUz" firstAttribute="trailing" secondItem="Nvz-oZ-A0J" secondAttribute="trailing" id="d4n-VK-in9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>
                     <navigationItem key="navigationItem" id="J3q-Rq-3x7">
@@ -23,6 +36,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="CoreTextView" destination="TpU-gO-2f1" id="T9g-cG-MY8"/>
+                        <outlet property="textLabel" destination="Nvz-oZ-A0J" id="6Qu-9Z-DPZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
