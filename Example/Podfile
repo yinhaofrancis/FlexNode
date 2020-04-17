@@ -1,6 +1,8 @@
 use_frameworks!
 platform :ios, '9.0'
+source 'https://github.com/yinhaofrancis/YHSpec.git'
 
 target 'FlexNode_Example' do
   pod 'FlexNode', :path => '../'
+  pod 'Ham/Render'
 end

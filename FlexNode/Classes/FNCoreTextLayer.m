@@ -14,7 +14,7 @@
     CTFrameRef frameref;
 }
 -(void)drawInContext:(CGContextRef)ctx{
-    CGSize size = [self FlexNodeContentSize:self.bounds.size];
+    CGSize size = [self contentNodeContentSize:self.bounds.size];
     CGContextScaleCTM(ctx, 1, -1);
     CGContextTranslateCTM(ctx, 0, -size.height);
     CTFrameDraw(frameref, ctx);
@@ -75,7 +75,7 @@
     _constraintSize = constraintSize;
 }
 
-- (CGSize)FlexNodeContentSize:(CGSize)constaintSize { 
+- (CGSize)contentNodeContentSize:(CGSize)constaintSize { 
     return CTFramesetterSuggestFrameSizeWithConstraints(frameSet, CFRangeMake(0, self.attributeString.length), nil, constaintSize, nil);
 }
 - (void)setFrame:(CGRect)frame{
@@ -96,6 +96,5 @@
     if(frameref){
         CFRelease(frameref);
     }
-    
 }
 @end

@@ -4,9 +4,9 @@
 #import <FNFlexNode.h>
 #import "FNCoreTextView.h"
 #import "FNRunDelegate.h"
+#import "FNAttributeString.h"
+#import <Ham/Ham.h>
 @interface FNViewController ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet FNCoreTextView *CoreTextView;
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -16,7 +16,6 @@
 {
     [super viewDidLoad];
 
-    self.CoreTextView.constraint = UIScreen.mainScreen.bounds.size.width;
     NSMutableParagraphStyle * paramx = [NSMutableParagraphStyle new];
     paramx.lineSpacing = 0;
     paramx.paragraphSpacing = 0;
@@ -53,24 +52,14 @@
      NSParagraphStyleAttributeName: param3
     }];
     [att appendAttributedString:desc];
-    NSLog(@"%@",att);
-    self.CoreTextView.attributeString = att;
     
-    NSMutableParagraphStyle * sa = [[NSMutableParagraphStyle alloc] init];
-    sa.alignment = NSTextAlignmentNatural;
-    NSMutableAttributedString * ma = [[NSMutableAttributedString alloc] initWithString:@"abc" attributes:@{
-        NSParagraphStyleAttributeName:sa,
-        NSForegroundColorAttributeName:UIColor.blackColor,
-    }];
-    NSMutableParagraphStyle * sa2 = [[NSMutableParagraphStyle alloc] init];
-    sa.alignment = NSTextAlignmentNatural;
-    NSAttributedString* b = [[NSAttributedString alloc] initWithString:@"def" attributes:@{
-        NSForegroundColorAttributeName:UIColor.blueColor,
-        NSParagraphStyleAttributeName:sa2,
-//        NSWritingDirectionAttributeName:@[@(NSWritingDirectionLeftToRight | NSWritingDirectionEmbedding)]
-    }];
-    [ma appendAttributedString:b];
-    self.textLabel.attributedText = ma;
+
+    UIImage* img = [[[HMDrawImage alloc] initWithSize:UIScreen.mainScreen.bounds.size isPNG:true ForCallback:^(CGContextRef  _Nonnull ctx, HMDrawImage * _Nonnull draw) {
+        [att drawInContext:ctx];
+    }] synchronization];
+    
+    self.view.layer.contents = (__bridge id _Nullable)(img.CGImage);
+    
 }
 - (IBAction)change:(UISlider *)sender {
 

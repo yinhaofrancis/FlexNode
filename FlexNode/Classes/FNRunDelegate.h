@@ -12,13 +12,21 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const FNRunDelegateKey;
 
 @interface FNRunDelegate : NSObject
+
 @property(nonatomic,assign) CGFloat ascent;
+
 @property(nonatomic,assign) CGFloat descent;
+
 @property(nonatomic,assign) CGFloat width;
+
 @property(nonatomic,strong) UIImage *image;
+
 @property(nonatomic,assign) CGFloat cornerRadius;
-@property(nonatomic,readonly) NSAttributedString * attributeString;
+
 @property(nonatomic,readonly) UIEdgeInsets margin;
+
+@property(nonatomic,weak) UIView *contentView;
+
 - (instancetype)initWithFont:(UIFont *)font;
 
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image;
@@ -32,8 +40,6 @@ extern NSString * const FNRunDelegateKey;
 - (instancetype)initWithSize:(CGSize)size
                    withImage:(UIImage *)image;
 
-- (instancetype)initWithAttributeString:(NSAttributedString *)string;
-
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect;
 @end
 
@@ -43,6 +49,7 @@ extern NSString * const FNRunDelegateKey;
                       paragraphStyle:(NSParagraphStyle * _Nullable)style;
 
 - (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate;
+
 
 @end
 

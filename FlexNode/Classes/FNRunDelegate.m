@@ -89,10 +89,6 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         }
         CGContextDrawImage(ctx, drawRect, self.image.CGImage);
     }
-    if(self.attributeString){
-        CGLayerRef layer = CGLayerCreateWithContext(ctx, rect.size, nil);
-        
-    }
     CGContextRestoreGState(ctx);
 }
 @end
@@ -152,8 +148,6 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     callback.dealloc = FunctionCTRunDelegateDeallocCallback;
     return callback;
 }
-
-
 @end
 
 
