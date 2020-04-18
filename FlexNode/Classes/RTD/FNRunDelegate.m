@@ -105,7 +105,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
         if(self.display && ![self.display autoDisplayRunDelegate:self]) {
-            [self.display runDelegate:self displayFrame:rect];
+            [self.display runDelegate:self displayFrame:rect context:ctx];
         }else{
             CGContextDrawImage(ctx, drawRect, self.image.CGImage);
         }

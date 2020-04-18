@@ -13,7 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FNRunDelegateDisplay <NSObject>
 
-- (void)runDelegate:(FNRunDelegate *)rundelegate displayFrame:(CGRect)frame;
+- (void)runDelegate:(FNRunDelegate *)rundelegate
+       displayFrame:(CGRect)frame
+            context:(CGContextRef)ctx;
 
 - (BOOL)autoDisplayRunDelegate:(FNRunDelegate *)rundelegate;
 @end
