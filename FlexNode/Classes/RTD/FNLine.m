@@ -23,6 +23,7 @@
         line.position = p[i];
         line.width = CTLineGetTypographicBounds(line.lineRef, &line->_ascent, &line->_descent, &line->_leading);
     }
+    free(p);
     return [lines copy];
 }
 

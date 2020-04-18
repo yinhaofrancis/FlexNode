@@ -7,7 +7,7 @@
 
 #import "FNRunDelegate.h"
 #import <CoreText/CoreText.h>
-
+#import "FNAttributeString.h"
 NSString * const FNRunDelegateKey = @"FNRunDelegateKey";
 
 CGFloat FunctionCTRunDelegateGetAscentCallback(void * refCon){
@@ -51,18 +51,46 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         self.ascent = (size.height + margin.top + margin.bottom) / 2;
         self.descent = self.ascent;
         _margin = margin;
-        self.image = image;
+        _image = image;
     }
     return self;
 }
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image{
     self = [self initWithFont:font];
     if (self){
-        self.image = image;
+        _image = image;
     }
     return self;
 }
-- (void)draw:(CGContextRef)ctx rect:(CGRect)rect{
+
+- (instancetype)initWithAttributeString:(NSAttributedString *)attribute{
+    return [self initWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                       margin:UIEdgeInsetsZero
+          WithAttributeString:attribute];
+}
+
+-(instancetype)initWithSize:(CGSize)size
+        WithAttributeString:(NSAttributedString *)attribute{
+    return [self initWithSize:size
+                       margin:UIEdgeInsetsZero
+          WithAttributeString:attribute];
+}
+- (instancetype)initWithSize:(CGSize)size
+                      margin:(UIEdgeInsets)margin
+         WithAttributeString:(NSAttributedString *)attribute{
+    self = [super init];
+    if(self) {
+        size = [attribute contentSize:size];
+        _attributedString = attribute;
+        _margin = margin;
+        self.width = size.width + margin.left + margin.right;
+        self.ascent = size.height + margin.top + margin.bottom;
+        self.descent = 0;
+    }
+    return self;
+}
+
+- (void)draw:(CGContextRef)ctx rect:(CGRect)rect containerSize:(CGSize)containerSize{
     CGContextSaveGState(ctx);
     rect = CGRectMake(
                       rect.origin.x + self.margin.left,
@@ -76,18 +104,16 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         CGFloat h = self.image.size.height * imageRatio;
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
-        if(self.cornerRadius > 0){
-            CGFloat corner = self.cornerRadius;
-            CGFloat max = MIN(drawRect.size.width, drawRect.size.height);
-            if(self.cornerRadius > max / 2 ){
-                corner = max / 2;
-            }
-            CGPathRef path = CGPathCreateWithRoundedRect(drawRect, corner, corner, nil);
-            CGContextAddPath(ctx, path);
-            CGContextClip(ctx);
-            CGPathRelease(path);
+        if(self.display && ![self.display autoDisplayRunDelegate:self]) {
+            [self.display runDelegate:self displayFrame:rect];
+        }else{
+            CGContextDrawImage(ctx, drawRect, self.image.CGImage);
         }
-        CGContextDrawImage(ctx, drawRect, self.image.CGImage);
+    }else if (self.attributedString){
+        CGRect drawRect = rect;
+        CGLayerRef layer = [self.attributedString createLayerInContext:ctx inRect:CGRectMake(0, 0, drawRect.size.width, drawRect.size.height) scale:UIScreen.mainScreen.scale];
+        CGContextDrawLayerInRect(ctx, drawRect, layer);
+        CGLayerRelease(layer);
     }
     CGContextRestoreGState(ctx);
 }
@@ -101,15 +127,13 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     p.lineSpacing = 0;
     p.paragraphSpacing = 0;
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
-    self = [self.class.alloc initWithString:@"-" attributes:@{
+    self = [self initWithString:@"-" attributes:@{
         (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
         FNRunDelegateKey:runDelegate,
         NSForegroundColorAttributeName:[UIColor clearColor],
         NSParagraphStyleAttributeName:p
     }];
-    if(self) {
-        
-    }
+    CFRelease(run);
     return self;
 }
 
@@ -118,25 +142,20 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
     
     if(style){
-        self = [self.class.alloc initWithString:@"-" attributes:@{
+        self = [self initWithString:@"-" attributes:@{
             (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
             FNRunDelegateKey:runDelegate,
             NSForegroundColorAttributeName:[UIColor clearColor],
             NSParagraphStyleAttributeName:style
         }];
-        if(self) {
-            
-        }
     }else{
-        self = [self.class.alloc initWithString:@"-" attributes:@{
+        self = [self initWithString:@"-" attributes:@{
             (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
             FNRunDelegateKey:runDelegate,
             NSForegroundColorAttributeName:[UIColor clearColor]
         }];
-        if(self) {
-            
-        }
     }
+    CFRelease(run);
     return self;
 }
 - (CTRunDelegateCallbacks) createCallback{

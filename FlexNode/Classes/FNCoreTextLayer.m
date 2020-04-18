@@ -56,7 +56,7 @@
                runframe:(CGRect)frame
                 context:(CGContextRef)ctx{
     FNRunDelegate *d = att[FNRunDelegateKey];
-    [d draw:ctx rect:frame];
+    [d draw:ctx rect:frame containerSize:self.frame.size];
 }
 - (void)setAttributeString:(NSAttributedString *)attributeString{
     if(frameSet){
