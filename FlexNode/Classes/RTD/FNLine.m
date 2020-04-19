@@ -50,8 +50,6 @@
            frame:(CTFrameRef)frame
          context:(CGContextRef)ctx
             rect:(CGRect)rect{
-    CGContextSetStrokeColorWithColor(ctx, UIColor.redColor.CGColor);
-    CGContextStrokeRectWithWidth(ctx, CGRectInset(line.frame, 0, 0), 1);
     NSArray<FNRun *>* runs = line.runs;
     for (CFIndex i = 0; i < runs.count; i++) {
         [self drawRun:runs[i]
