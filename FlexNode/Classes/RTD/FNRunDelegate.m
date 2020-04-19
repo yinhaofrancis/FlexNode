@@ -7,7 +7,7 @@
 
 #import "FNRunDelegate.h"
 #import <CoreText/CoreText.h>
-#import "FNAttributeString.h"
+
 NSString * const FNRunDelegateKey = @"FNRunDelegateKey";
 
 CGFloat FunctionCTRunDelegateGetAscentCallback(void * refCon){
@@ -75,20 +75,20 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
                        margin:UIEdgeInsetsZero
           WithAttributeString:attribute];
 }
-- (instancetype)initWithSize:(CGSize)size
-                      margin:(UIEdgeInsets)margin
-         WithAttributeString:(NSAttributedString *)attribute{
-    self = [super init];
-    if(self) {
-        size = [attribute contentSize:size];
-        _attributedString = attribute;
-        _margin = margin;
-        self.width = size.width + margin.left + margin.right;
-        self.ascent = size.height + margin.top + margin.bottom;
-        self.descent = 0;
-    }
-    return self;
-}
+//- (instancetype)initWithSize:(CGSize)size
+//                      margin:(UIEdgeInsets)margin
+//         WithAttributeString:(NSAttributedString *)attribute{
+//    self = [super init];
+//    if(self) {
+//        size = [attribute contentSize:size];
+//        _attributedString = attribute;
+//        _margin = margin;
+//        self.width = size.width + margin.left + margin.right;
+//        self.ascent = size.height + margin.top + margin.bottom;
+//        self.descent = 0;
+//    }
+//    return self;
+//}
 
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect containerSize:(CGSize)containerSize{
     CGContextSaveGState(ctx);
@@ -97,25 +97,53 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
                       rect.origin.y + self.margin.bottom,
                       rect.size.width - self.margin.left - self.margin.right,
                       rect.size.height - self.margin.top - self.margin.bottom);
-    
-    
-    if(self.image){
+    rect = [self calcJustify:rect containerSize:containerSize];
+    if(self.display && self.displayView){
+        UIView * v = [self.display runDelegateView];
+        [self.displayView addSubview: v];
+        v.frame = [self viewFrameFromContextFrame:rect WithContainer:containerSize];
+    }else if(self.image){
         CGFloat imageRatio = rect.size.width / self.image.size.width;
         CGFloat h = self.image.size.height * imageRatio;
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
-        if(self.display && ![self.display autoDisplayRunDelegate:self]) {
-            [self.display runDelegate:self displayFrame:rect containerSize:containerSize context:ctx];
-        }else{
-            CGContextDrawImage(ctx, drawRect, self.image.CGImage);
-        }
+        CGContextDrawImage(ctx, drawRect, self.image.CGImage);
     }else if (self.attributedString){
         CGRect drawRect = rect;
-        CGLayerRef layer = [self.attributedString createLayerInContext:ctx inRect:CGRectMake(0, 0, drawRect.size.width, drawRect.size.height) scale:UIScreen.mainScreen.scale];
+        CGLayerRef layer = [self.frame createLayerInContext:ctx];
         CGContextDrawLayerInRect(ctx, drawRect, layer);
         CGLayerRelease(layer);
     }
     CGContextRestoreGState(ctx);
+}
+- (CGRect)calcJustify:(CGRect)rect containerSize:(CGSize)size{
+    CGFloat delta = (size.width - self.line.frame.size.width);
+    
+    switch (self.justify) {
+            
+        case FNRunDelegateJustifyStart:
+            delta = 0;
+            return rect;
+        case FNRunDelegateJustifyCenter:
+            delta = delta / 2.0;
+            return CGRectMake(rect.origin.x + delta, rect.origin.y, rect.size.width, rect.size.height);
+        case FNRunDelegateJustifyEnd:
+            delta = delta;
+            return CGRectMake(rect.origin.x + delta, rect.origin.y, rect.size.width, rect.size.height);
+        case FNRunDelegateJustifyEvenly:
+            delta = delta / (self.line.countOfRun + 1);
+            return CGRectMake(rect.origin.x + delta * (self.run.index + 1), rect.origin.y, rect.size.width, rect.size.height);
+            break;
+        case FNRunDelegateJustifyAround:
+            delta = delta / (self.line.countOfRun * 2);
+            return CGRectMake(rect.origin.x + delta * (self.run.index + 1) + (self.run.index * delta), rect.origin.y, rect.size.width, rect.size.height);
+            break;
+        case FNRunDelegateJustifyBetween:{
+            delta = self.line.countOfRun > 1 ? (delta / (self.line.countOfRun - 1)) : 0;
+            return CGRectMake(rect.origin.x + delta * (self.run.index), rect.origin.y, rect.size.width, rect.size.height);
+        }
+    }
+    
 }
 - (CGRect)viewFrameFromContextFrame:(CGRect)rect WithContainer:(CGSize)containerSize{
     CGFloat y = containerSize.height - rect.origin.y - rect.size.height;

@@ -9,16 +9,21 @@
 #import "FNLine.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, FNRunDelegateJustify) {
+    FNRunDelegateJustifyStart,
+    FNRunDelegateJustifyCenter,
+    FNRunDelegateJustifyEnd,
+    FNRunDelegateJustifyEvenly,
+    FNRunDelegateJustifyAround,
+    FNRunDelegateJustifyBetween
+};
+
 @class FNRunDelegate;
 
 @protocol FNRunDelegateDisplay <NSObject>
 
-- (void)runDelegate:(FNRunDelegate *)rundelegate
-       displayFrame:(CGRect)frame
-      containerSize:(CGSize)containerSize
-            context:(CGContextRef)ctx;
+- (UIView*) runDelegateView;
 
-- (BOOL)autoDisplayRunDelegate:(FNRunDelegate *)rundelegate;
 @end
 
 extern NSString * const FNRunDelegateKey;
@@ -41,7 +46,13 @@ extern NSString * const FNRunDelegateKey;
 
 @property(nullable,nonatomic) UIView* displayView;
 
-@property(nonatomic,strong) FNLine* line;
+@property(nonatomic,weak) FNFrame *frame;
+
+@property(nonatomic,weak) FNLine *line;
+
+@property(nonatomic,weak) FNRun *run;
+
+@property(nonatomic,assign) FNRunDelegateJustify justify;
 
 - (instancetype)initWithFont:(UIFont *)font;
 

@@ -8,6 +8,31 @@
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
 NS_ASSUME_NONNULL_BEGIN
+@class FNRun;
+@class FNLine;
+@class FNFrame;
+
+
+@interface FNFrame : NSObject
+
+@property(nonatomic,readonly) NSArray<FNLine *> *lines;
+
+@property(nonatomic,readonly) CTFrameRef frameRef;
+
+@property(nonatomic,readonly) CGSize frameSize;
+
++(FNFrame *)createFrame:(NSAttributedString *) attributeString size:(CGSize)size;
+
+- (void)drawInContext:(CGContextRef)ctx
+               inRect:(CGRect)rect;
+
+- (CGLayerRef)createLayerInContext:(CGContextRef)ctx;
+
+- (UIImage *)createUIImage;
+
+- (CGImageRef)createCGImage;
+
+@end
 
 @interface FNLine : NSObject
 
@@ -24,7 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) CTLineRef   lineRef;
 
 @property(nonatomic,readonly) CGRect    frame;
+
+@property(nonatomic,readonly) CFIndex countOfRun;
+
+@property(nonatomic,readonly) NSArray<FNRun *> *runs;
+
 +(NSArray<FNLine *> *)linesCreateFrom:(CTFrameRef)frame;
+
 @end
 
 
@@ -45,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) CGFloat     width;
 
 @property(nonatomic,readonly) CGRect    frame;
+
+@property(nonatomic,assign) NSInteger   index;
 
 +(NSArray<FNRun *> *)runsCreateFrom:(FNLine *)line;
 @end

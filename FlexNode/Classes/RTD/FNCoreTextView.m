@@ -6,7 +6,6 @@
 //
 
 #import "FNCoreTextView.h"
-#import "FNAttributeString.h"
 @implementation FNCoreTextView
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -27,10 +26,10 @@
     return self;
 }
 
-- (CGSize)intrinsicContentSize{
-    CGSize esSize = CGSizeMake(self.estimatedSize.width ? self.estimatedSize.width : CGFLOAT_MAX, self.estimatedSize.height ? self.estimatedSize.height : CGFLOAT_MAX);
-    return [self.string contentSize:esSize];
-}
+//- (CGSize)intrinsicContentSize{
+//    CGSize esSize = CGSizeMake(self.estimatedSize.width ? self.estimatedSize.width : CGFLOAT_MAX, self.estimatedSize.height ? self.estimatedSize.height : CGFLOAT_MAX);
+//    return [self.string contentSize:esSize];
+//}
 
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -40,12 +39,12 @@
 
 - (void)asyncLoadString{
     CGRect rect = self.bounds;
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-        CGImageRef img = [self.string createImageInRect:rect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.layer.contents = (__bridge id _Nullable)(img);
-            CGImageRelease(img);
-        });
-    });
+//    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+//        CGImageRef img = [self.string createImageInRect:rect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.layer.contents = (__bridge id _Nullable)(img);
+//            CGImageRelease(img);
+//        });
+//    });
 }
 @end
