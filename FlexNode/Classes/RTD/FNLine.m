@@ -49,8 +49,6 @@
            frame:(CTFrameRef)frame
          context:(CGContextRef)ctx
             rect:(CGRect)rect{
-    CGContextSetStrokeColorWithColor(ctx, UIColor.redColor.CGColor);
-    CGContextStrokeRect(ctx, line.frame);
     NSArray<FNRun *>* runs = line.runs;
     for (CFIndex i = 0; i < runs.count; i++) {
         [self drawRun:runs[i]

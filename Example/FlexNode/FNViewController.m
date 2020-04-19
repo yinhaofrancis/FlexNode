@@ -22,17 +22,17 @@
         NSForegroundColorAttributeName:UIColor.whiteColor
     }];
     
-    for (int i = 0; i < 3; i ++) {
-        FNRunDelegate* run = [[FNRunDelegate alloc] initWithSize:CGSizeMake(100, 100) margin:UIEdgeInsetsMake(50, 0, 0, 0)  withImage:[UIImage imageNamed:@"avatar"]];
+    for (int i = 0; i < 10; i ++) {
+        FNRunDelegate* run = [[FNRunDelegate alloc] initWithSize:CGSizeMake(100, 100) margin:UIEdgeInsetsMake(10, 0, 0, 0)  withImage:[UIImage imageNamed:@"avatar"]];
         NSMutableAttributedString* a = [[NSMutableAttributedString alloc] initWithRunDelegate:run];
         [att appendAttributedString:a];
-        run.display = self;
+//        run.display = self;
         run.displayView = _vv;
-        run.justify = FNRunDelegateJustifyAround;
+        run.justify = FNRunDelegateJustifyEnd;
         
     }
 
-    FNFrame * f = [FNFrame createFrame:att size:CGSizeMake(400, 0)];
+    FNFrame * f = [FNFrame createFrame:att size:CGSizeMake(480, 0)];
     
     UIImage * i = [f createUIImage];
     
