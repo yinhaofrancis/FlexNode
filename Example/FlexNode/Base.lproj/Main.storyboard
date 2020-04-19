@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqh-PH-meE" customClass="UIImageView">
-                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                <rect key="frame" x="67.5" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" placeholder="YES" id="JRp-Zt-Tm0"/>
@@ -27,8 +27,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Aqh-PH-meE" firstAttribute="top" secondItem="5xr-fR-SUz" secondAttribute="top" id="63P-GH-jDF"/>
                             <constraint firstItem="Aqh-PH-meE" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="lhZ-Cg-BVc"/>
-                            <constraint firstItem="Aqh-PH-meE" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="sTC-WJ-jEZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5xr-fR-SUz"/>
                     </view>

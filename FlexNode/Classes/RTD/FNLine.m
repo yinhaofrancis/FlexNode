@@ -11,19 +11,20 @@
 @implementation FNFrame
 
 + (FNFrame *)createFrame:(NSAttributedString *)attributeString size:(CGSize)size{
-    size = CGSizeMake(size.width <= 0 ? CGFLOAT_MAX : size.width, size.height <= 0 ? CGFLOAT_MAX : size.height);
+    CGSize frameSize = CGSizeMake(size.width <= 0 ? CGFLOAT_MAX : size.width, size.height <= 0 ? CGFLOAT_MAX : size.height);
     
     FNFrame * fme = [[FNFrame alloc] init];
     CTFramesetterRef _frameSetRef = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributeString);
-    size = CTFramesetterSuggestFrameSizeWithConstraints(_frameSetRef, CFRangeMake(0, attributeString.length), nil, size, nil);
-    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, size.width,size.height), nil);
+    frameSize = CTFramesetterSuggestFrameSizeWithConstraints(_frameSetRef, CFRangeMake(0, attributeString.length), nil, frameSize, nil);
+      frameSize = CGSizeMake(size.width > 0 ? size.width : frameSize.width, size.height > 0 ? size.height : frameSize.height);
+    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, frameSize.width,frameSize.height), nil);
     
     fme->_frameRef = CTFramesetterCreateFrame(_frameSetRef,
                                               CFRangeMake(0, attributeString.length),
                                               path,
                                               nil);
     
-    fme->_frameSize = size;
+    fme->_frameSize = frameSize;
     fme->_lines = [FNLine linesCreateFrom:fme->_frameRef];
     CGPathRelease(path);
     CFRelease(_frameSetRef);
@@ -49,6 +50,8 @@
            frame:(CTFrameRef)frame
          context:(CGContextRef)ctx
             rect:(CGRect)rect{
+    CGContextSetStrokeColorWithColor(ctx, UIColor.redColor.CGColor);
+    CGContextStrokeRectWithWidth(ctx, CGRectInset(line.frame, 0, 0), 1);
     NSArray<FNRun *>* runs = line.runs;
     for (CFIndex i = 0; i < runs.count; i++) {
         [self drawRun:runs[i]

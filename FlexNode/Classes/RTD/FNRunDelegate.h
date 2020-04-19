@@ -54,6 +54,10 @@ extern NSString * const FNRunDelegateKey;
 
 @property(nonatomic,assign) FNRunDelegateJustify justify;
 
+@property(nonatomic,readonly) BOOL isEmpty;
+
+@property(nonatomic,readonly) NSString* originText;
+
 - (instancetype)initWithFont:(UIFont *)font;
 
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image;
@@ -76,6 +80,8 @@ extern NSString * const FNRunDelegateKey;
 - (instancetype)initWithSize:(CGSize)size
                    withImage:(UIImage *)image;
 
+- (instancetype)initWithEmptyLine:(CGFloat)height;
+
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect containerSize:(CGSize)containerSize;
 
 - (CGRect)viewFrameFromContextFrame:(CGRect)rect WithContainer:(CGSize)containerSize;
@@ -84,8 +90,7 @@ extern NSString * const FNRunDelegateKey;
 
 @interface NSAttributedString (FNRunDelegate)
 
-- (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate
-                      paragraphStyle:(NSParagraphStyle * _Nullable)style;
+- (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate attribute:(nullable NSDictionary<NSAttributedStringKey,id> *)attribute;
 
 - (instancetype) initWithRunDelegate:(FNRunDelegate *)runDelegate;
 

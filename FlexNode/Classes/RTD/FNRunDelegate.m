@@ -33,6 +33,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         self.width = font.pointSize;
         self.ascent = font.ascender;
         self.descent = -font.descender;
+        _originText = @"-";
     }
     return self;
 }
@@ -52,6 +53,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         self.descent = self.ascent;
         _margin = margin;
         _image = image;
+        _originText = @"-";
     }
     return self;
 }
@@ -59,6 +61,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
     self = [self initWithFont:font];
     if (self){
         _image = image;
+        _originText = @"-";
     }
     return self;
 }
@@ -75,20 +78,33 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
                        margin:UIEdgeInsetsZero
           WithAttributeString:attribute];
 }
-//- (instancetype)initWithSize:(CGSize)size
-//                      margin:(UIEdgeInsets)margin
-//         WithAttributeString:(NSAttributedString *)attribute{
-//    self = [super init];
-//    if(self) {
-//        size = [attribute contentSize:size];
-//        _attributedString = attribute;
-//        _margin = margin;
-//        self.width = size.width + margin.left + margin.right;
-//        self.ascent = size.height + margin.top + margin.bottom;
-//        self.descent = 0;
-//    }
-//    return self;
-//}
+- (instancetype)initWithSize:(CGSize)size
+                      margin:(UIEdgeInsets)margin
+         WithAttributeString:(NSAttributedString *)attribute{
+    self = [super init];
+    if(self) {
+        self.frame = [FNFrame createFrame:attribute size:size];
+        size = self.frame.frameSize;
+        _attributedString = attribute;
+        _margin = margin;
+        self.width = size.width + margin.left + margin.right;
+        self.ascent = size.height + margin.top + margin.bottom;
+        self.descent = 0;
+        _originText = @"-";
+    }
+    return self;
+}
+
+- (instancetype)initWithEmptyLine:(CGFloat)height{
+    self = [super init];
+    if(self){
+        self.ascent = height;
+        self.width = CGFLOAT_MAX;
+        _isEmpty = true;
+        _originText = @"-";
+    }
+    return self;
+}
 
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect containerSize:(CGSize)containerSize{
     CGContextSaveGState(ctx);
@@ -156,37 +172,32 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
 
 - (instancetype)initWithRunDelegate:(FNRunDelegate *)runDelegate{
     CTRunDelegateCallbacks callback = [self createCallback];
-    NSMutableParagraphStyle * p = [NSMutableParagraphStyle new];
-    p.lineSpacing = 0;
-    p.paragraphSpacing = 0;
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
-    self = [self initWithString:@"-" attributes:@{
-        (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
-        FNRunDelegateKey:runDelegate,
-        NSForegroundColorAttributeName:[UIColor clearColor],
-        NSParagraphStyleAttributeName:p
+    return [self initWithRunDelegate:runDelegate attribute:@{
+            (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
+                                FNRunDelegateKey:runDelegate,
+            NSFontAttributeName:[UIFont systemFontOfSize:0.01],
+                     NSForegroundColorAttributeName:[UIColor clearColor]
     }];
-    CFRelease(run);
-    return self;
 }
 
-- (instancetype)initWithRunDelegate:(FNRunDelegate *)runDelegate paragraphStyle:(NSParagraphStyle *)style{
+- (instancetype)initWithRunDelegate:(FNRunDelegate *)runDelegate
+                          attribute:(nullable NSDictionary<NSAttributedStringKey,id> *)attribute{
     CTRunDelegateCallbacks callback = [self createCallback];
     CTRunDelegateRef run = CTRunDelegateCreate(&callback, (__bridge void * _Nullable)(runDelegate));
-    
-    if(style){
-        self = [self initWithString:@"-" attributes:@{
-            (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
-            FNRunDelegateKey:runDelegate,
-            NSForegroundColorAttributeName:[UIColor clearColor],
-            NSParagraphStyleAttributeName:style
-        }];
-    }else{
-        self = [self initWithString:@"-" attributes:@{
-            (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
-            FNRunDelegateKey:runDelegate,
-            NSForegroundColorAttributeName:[UIColor clearColor]
-        }];
+    NSMutableDictionary *m = [attribute mutableCopy];
+    if(m){
+        m = [NSMutableDictionary new];
+    }
+    [m addEntriesFromDictionary:@{
+        (NSString *)kCTRunDelegateAttributeName:(__bridge id)run,
+        FNRunDelegateKey:runDelegate,
+        NSFontAttributeName:[UIFont systemFontOfSize:0.01],
+        NSForegroundColorAttributeName:[UIColor clearColor]
+    }];
+    self = [self initWithString:runDelegate.originText attributes:m];
+    if(self) {
+        
     }
     CFRelease(run);
     return self;
