@@ -38,6 +38,8 @@
            frame:(CTFrameRef)frame
          context:(CGContextRef)ctx
             rect:(CGRect)rect{
+    CGContextSetStrokeColorWithColor(ctx, UIColor.redColor.CGColor);
+    CGContextStrokeRect(ctx, line.frame);
     NSArray<FNRun *>* runs = [FNRun runsCreateFrom:line];
     for (CFIndex i = 0; i < runs.count; i++) {
         [self drawRun:runs[i]
@@ -65,7 +67,7 @@
     CTRunDraw(run.runRef, ctx, CFRangeMake(0, 0));
     CFDictionaryRef attribute = CTRunGetAttributes(run.runRef);
     FNRunDelegate *rund = CFDictionaryGetValue(attribute, (__bridge const void *)(FNRunDelegateKey));
-    
+    rund.line = line;
     [rund draw:ctx rect:renderFrame containerSize:rect.size];
     CGContextRestoreGState(ctx);
 }

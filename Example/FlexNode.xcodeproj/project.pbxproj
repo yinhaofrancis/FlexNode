@@ -228,12 +228,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FlexNode_Example/Pods-FlexNode_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FlexNode/FlexNode.framework",
-				"${BUILT_PRODUCTS_DIR}/Ham/Ham.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlexNode.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ham.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

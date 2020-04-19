@@ -1,16 +1,8 @@
 PODS:
   - FlexNode (0.1.0)
-  - Ham/Module (0.2.21)
-  - Ham/Render (0.2.21):
-    - Ham/Module
 
 DEPENDENCIES:
   - FlexNode (from `../`)
-  - Ham/Render
-
-SPEC REPOS:
-  https://github.com/yinhaofrancis/YHSpec.git:
-    - Ham
 
 EXTERNAL SOURCES:
   FlexNode:
@@ -18,8 +10,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FlexNode: 516f1b44e4c6b5f16d1c50bd2583fe6769d56c77
-  Ham: bf14ca9d9b31f9dec4131eef4b764ce031d24394
 
-PODFILE CHECKSUM: b062a4492dcece696143621db409d71ab58ccc3c
+PODFILE CHECKSUM: d4dfce6a2127784836453bcecebd492dec726c8e
 
 COCOAPODS: 1.9.1

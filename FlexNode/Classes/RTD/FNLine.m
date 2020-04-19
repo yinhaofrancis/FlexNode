@@ -28,7 +28,7 @@
 }
 
 - (CGRect)frame{
-    return CGRectMake(self.position.x, self.position.y,self.width, self.ascent + self.descent);
+    return CGRectMake(self.position.x, self.position.y - self.descent,self.width, self.ascent + self.descent);
 }
 @end
 

@@ -105,7 +105,7 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         CGFloat y = (rect.size.height - h) / 2;
         CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y + y, rect.size.width, h);
         if(self.display && ![self.display autoDisplayRunDelegate:self]) {
-            [self.display runDelegate:self displayFrame:rect context:ctx];
+            [self.display runDelegate:self displayFrame:rect containerSize:containerSize context:ctx];
         }else{
             CGContextDrawImage(ctx, drawRect, self.image.CGImage);
         }
@@ -116,6 +116,11 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
         CGLayerRelease(layer);
     }
     CGContextRestoreGState(ctx);
+}
+- (CGRect)viewFrameFromContextFrame:(CGRect)rect WithContainer:(CGSize)containerSize{
+    CGFloat y = containerSize.height - rect.origin.y - rect.size.height;
+    CGRect r = CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height);
+    return r;
 }
 @end
 

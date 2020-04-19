@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FNLine.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class FNRunDelegate;
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)runDelegate:(FNRunDelegate *)rundelegate
        displayFrame:(CGRect)frame
+      containerSize:(CGSize)containerSize
             context:(CGContextRef)ctx;
 
 - (BOOL)autoDisplayRunDelegate:(FNRunDelegate *)rundelegate;
@@ -36,7 +37,11 @@ extern NSString * const FNRunDelegateKey;
 
 @property(nonatomic,readonly) UIEdgeInsets margin;
 
-@property(nonatomic,nullable) id<FNRunDelegateDisplay>display;
+@property(weak,nullable) id<FNRunDelegateDisplay>display;
+
+@property(nullable,nonatomic) UIView* displayView;
+
+@property(nonatomic,strong) FNLine* line;
 
 - (instancetype)initWithFont:(UIFont *)font;
 
@@ -62,6 +67,7 @@ extern NSString * const FNRunDelegateKey;
 
 - (void)draw:(CGContextRef)ctx rect:(CGRect)rect containerSize:(CGSize)containerSize;
 
+- (CGRect)viewFrameFromContextFrame:(CGRect)rect WithContainer:(CGSize)containerSize;
 
 @end
 
