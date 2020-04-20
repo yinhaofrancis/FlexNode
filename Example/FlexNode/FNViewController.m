@@ -16,40 +16,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-    NSMutableAttributedString* att = [[NSMutableAttributedString alloc] initWithString:@"阿上课对方开始点击 上的纠纷时绝对是 阿萨德肌肤设计的 啊说的话啊快就收到回复啊快就收到 \n" attributes:@{
-        NSFontAttributeName:[UIFont systemFontOfSize:20],
+    NSMutableParagraphStyle * ps = [[NSMutableParagraphStyle alloc] init];
+    ps.paragraphSpacing = 20;
+    ps.lineSpacing = 10;
+    NSMutableAttributedString* att = [[NSMutableAttributedString alloc] initWithString:@"阿上课对方开始点击 上的纠纷时绝对是 阿萨德肌肤设计的 \n 啊说的话啊快就收到回复啊快就收到 \n" attributes:@{
+        NSFontAttributeName:[UIFont systemFontOfSize:24],
         NSForegroundColorAttributeName:UIColor.whiteColor,
+        NSParagraphStyleAttributeName:ps
     }];
-    NSAttributedString * a2 = [[NSAttributedString alloc] initWithRunDelegate:[FNRunDelegate.alloc initWithEmptyLine:30]];
-    [att appendAttributedString:a2];
-    for (int i = 0; i < 9; i ++) {
-        FNRunDelegate* run = [[FNRunDelegate alloc] initWithSize:CGSizeMake(100, 100) margin:UIEdgeInsetsMake(0, 0, 0, 0)  withImage:[UIImage imageNamed:@"avatar"]];
-        NSMutableAttributedString* a = [[NSMutableAttributedString alloc] initWithRunDelegate:run attribute:@{
-        }];
-        [att appendAttributedString:a];
-//        run.display = self;
-        run.displayView = _vv;
-        run.justify = FNRunDelegateJustifyBetween;
+
+    FNRunDelegate* run = [[FNRunDelegate alloc] initWithFont:[UIFont systemFontOfSize:40] withImage:[UIImage imageNamed:@"avatar"]];
+    NSMutableAttributedString* a = [[NSMutableAttributedString alloc] initWithRunDelegate:run attribute:@{
         
-    }
-    
-    NSAttributedString * a = [[NSAttributedString alloc] initWithRunDelegate:[FNRunDelegate.alloc initWithEmptyLine:30]];
+        NSParagraphStyleAttributeName:ps
+    }];
+    [att appendAttributedString:a];
+
 //    NSAttributedString * a = [[NSAttributedString alloc] initWithString:@"\n" attributes:@{
 //        NSFontAttributeName:[UIFont systemFontOfSize:300]
 //    }];
     
     
-    [att appendAttributedString:a];
+//    [att appendAttributedString:a];
     
 
     
     NSAttributedString* kk = [[NSAttributedString alloc]
-                              initWithString:@"上的纠纷时绝对是 阿萨德肌肤设计的 啊说的话啊快就收到回复啊快就收到 " attributes:@{
+                              initWithString:@"\n上的纠纷时绝对是 阿萨德肌肤设计的 \n 啊说的话啊快就收到回复啊快就收到 " attributes:@{
                                   NSFontAttributeName:[UIFont systemFontOfSize:24 weight:UIFontWeightMedium],
-                                  NSForegroundColorAttributeName:UIColor.whiteColor
-                                  
+                                  NSForegroundColorAttributeName:UIColor.whiteColor,
+                                  NSParagraphStyleAttributeName:ps
                               }];
     [att appendAttributedString:kk];
     FNFrame * f = [FNFrame createFrame:att size:CGSizeMake(375, 0)];
@@ -57,6 +53,8 @@
     UIImage * i = [f createUIImage];
     
     self.vv.image = i;
+    
+    
     
     
 }
