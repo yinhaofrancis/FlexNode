@@ -58,8 +58,6 @@ extern NSString * const FNRunDelegateKey;
 
 @property(nonatomic,readonly) NSString* originText;
 
-- (instancetype)initWithFont:(UIFont *)font;
-
 - (instancetype)initWithFont:(UIFont *)font withImage:(UIImage *)image;
 
 - (instancetype)initwithImage:(UIImage *)image;

@@ -27,16 +27,6 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
 }
 
 @implementation FNRunDelegate
-- (instancetype)initWithFont:(UIFont *)font{
-    self = [super init];
-    if(self) {
-        self.width = font.pointSize;
-        self.ascent = font.ascender;
-        self.descent = -font.descender;
-        _originText = @"-";
-    }
-    return self;
-}
 - (instancetype)initWithSize:(CGSize)size withImage:(UIImage *)image{
     return [self initWithSize:size margin:UIEdgeInsetsZero withImage:image];
 }
