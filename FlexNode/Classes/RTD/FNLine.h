@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,readonly) CGSize frameSize;
 
+@property(nullable,nonatomic) UIView* displayView;
+
 +(FNFrame *)createFrame:(NSAttributedString *) attributeString size:(CGSize)size;
 
 - (void)drawInContext:(CGContextRef)ctx

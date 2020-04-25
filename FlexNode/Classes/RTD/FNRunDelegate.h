@@ -44,7 +44,7 @@ extern NSString * const FNRunDelegateKey;
 
 @property(weak,nullable) id<FNRunDelegateDisplay>display;
 
-@property(nullable,nonatomic) UIView* displayView;
+@property(assign,nonatomic) BOOL isDynamicDisplay;
 
 @property(nonatomic,weak) FNFrame *frame;
 

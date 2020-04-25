@@ -114,10 +114,15 @@ void FunctionCTRunDelegateDeallocCallback(void * refCon){
                       rect.size.width - self.margin.left - self.margin.right,
                       rect.size.height - self.margin.top - self.margin.bottom);
     rect = [self calcJustify:rect containerSize:containerSize];
-    if(self.display && self.displayView){
-        UIView * v = [self.display runDelegateView];
-        [self.displayView addSubview: v];
-        v.frame = [self viewFrameFromContextFrame:rect WithContainer:containerSize];
+    if(self.isDynamicDisplay){
+        CGRect vrect = [self viewFrameFromContextFrame:rect WithContainer:containerSize];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(self.display && self.frame.displayView){
+                UIView * v = [self.display runDelegateView];
+                [self.frame.displayView addSubview: v];
+                v.frame = vrect;
+            }
+        });
     }else if(self.image){
         CGFloat imageRatio = rect.size.width / self.image.size.width;
         CGFloat h = self.image.size.height * imageRatio;

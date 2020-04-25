@@ -7,7 +7,7 @@
 
 
 @interface FNViewController ()<FNRunDelegateDisplay>
-@property (weak, nonatomic) IBOutlet UIImageView *vv;
+@property (weak, nonatomic) IBOutlet FNCoreTextView *vv;
 
 @end
 
@@ -48,11 +48,13 @@
                                   NSParagraphStyleAttributeName:ps
                               }];
     [att appendAttributedString:kk];
-    FNFrame * f = [FNFrame createFrame:att size:CGSizeMake(375, 0)];
+//    FNFrame * f = [FNFrame createFrame:att size:CGSizeMake(375, 0)];
     
-    UIImage * i = [f createUIImage];
+    self.vv.string = att;
     
-    self.vv.image = i;
+//    UIImage * i = [f createUIImage];
+//    
+//    self.vv.image = i;
     
     
     

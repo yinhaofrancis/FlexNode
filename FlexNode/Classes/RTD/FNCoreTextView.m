@@ -6,7 +6,10 @@
 //
 
 #import "FNCoreTextView.h"
-@implementation FNCoreTextView
+#import "FNLine.h"
+@implementation FNCoreTextView{
+    FNFrame * textFrame;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -26,25 +29,33 @@
     return self;
 }
 
-//- (CGSize)intrinsicContentSize{
-//    CGSize esSize = CGSizeMake(self.estimatedSize.width ? self.estimatedSize.width : CGFLOAT_MAX, self.estimatedSize.height ? self.estimatedSize.height : CGFLOAT_MAX);
-//    return [self.string contentSize:esSize];
-//}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    [self asyncLoadString];
+- (void)asyncLoadString{
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+        if (self->textFrame) {
+            CGImageRef img = [self->textFrame createCGImage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.layer.contents = (__bridge id _Nullable)(img);
+                CGImageRelease(img);
+            });
+        }
+    });
 }
 
-- (void)asyncLoadString{
-    CGRect rect = self.bounds;
-//    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-//        CGImageRef img = [self.string createImageInRect:rect];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.layer.contents = (__bridge id _Nullable)(img);
-//            CGImageRelease(img);
-//        });
-//    });
+- (CGSize)intrinsicContentSize{
+    return textFrame.frameSize;
+}
+- (void)setString:(NSAttributedString *)string{
+    _string = string;
+    if(self.estimatedSize.width != 0 || self.estimatedSize.height != 0){
+        textFrame = [FNFrame createFrame:string size:self.estimatedSize];
+        [self setNeedsDisplay];
+    }
+}
+- (void)setEstimatedSize:(CGSize)estimatedSize{
+    _estimatedSize = estimatedSize;
+    if(self.string.length > 0){
+        textFrame = [FNFrame createFrame:self.string size:self.estimatedSize];
+        [self setNeedsDisplay];
+    }
 }
 @end
